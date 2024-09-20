@@ -2,24 +2,6 @@
     "editor.rulers": [
         88, 100
     ],
-    "python.testing.unittestArgs": [
-        "-v",
-        "-s",
-        "./backend",
-        "-p",
-        "*test*.py"
-    ],
-    "python.testing.pytestEnabled": false,
-    "python.testing.nosetestsEnabled": false,
-    "python.testing.unittestEnabled": true,
-    "python.pythonPath": "backend/venv/bin/python",
-
-    "python.formatting.provider": "black",
-    "python.formatting.blackPath": "backend/venv/bin/black",
-  
-    "[python]": {
-      "editor.formatOnSave": true
-    },
 
     // Controls if suggestions should be accepted the 'Enter' key
     // - in addition to via the 'Tab' key.
@@ -29,18 +11,14 @@
     // - in addition to via the 'Tab' key.
     "editor.acceptSuggestionOnCommitCharacter": false,
 
-    "[typescript]": {
+    "[javascript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode",
         "editor.formatOnSave": true
     },
-    "[typescriptreact]": {
+    "[javascriptreact]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode",
         "editor.formatOnSave": true
     },
     
-    "jest.rootPath": "frontend",
-    "jest.jestCommandLine": "npm run test --",
-    "jest.runMode": "on-demand",
-
     "prettier.singleQuote": false
 }
