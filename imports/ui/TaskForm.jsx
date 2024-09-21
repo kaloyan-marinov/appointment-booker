@@ -1,32 +1,66 @@
 import React, { useState } from "react";
-import { TasksCollection } from "/imports/api/TasksCollection";
+// import { TasksCollection } from "/imports/api/TasksCollection";
 
 export const TaskForm = () => {
-  const [text, setText] = useState("");
+  const [date, setDate] = useState(""); // TODO: (2024/09/21, 21:36) - is there a `date`?
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
 
-    if (!text) return;
+  //   if (!text) return;
 
-    await Meteor.callAsync("tasks.insert", {
-      text: text.trim(),
-      createdAt: new Date(),
-    });
+  //   await Meteor.callAsync("tasks.insert", {
+  //     text: text.trim(),
+  //     createdAt: new Date(),
+  //   });
 
-    setText("");
-  };
+  //   setText("");
+  // };
 
   return (
-    <form className="task-form" onSubmit={handleSubmit}>
-      <input
-        type="text"
-        placeholder="Type to add new tasks"
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-      />
+    <form
+      className="task-form"
+      // onSubmit={handleSubmit}
+    >
+      <div>
+        <label htmlFor="date"></label>
 
-      <button type="submit">Add Task</button>
+        <input
+          type="text" // TODO: (2024/09/21, 21:36) - is there a `date`?
+          placeholder="Type to add new tasks"
+          name="date"
+          value={date}
+          onChange={(e) => setDate(e.target.value)}
+        />
+      </div>
+
+      <div>
+        <label htmlFor="firstName"></label>
+
+        <input
+          type="text"
+          placeholder="First name"
+          name="firstName"
+          value={firstName}
+          onChange={(e) => setFirstName(e.target.value)}
+        />
+      </div>
+
+      <div>
+        <label htmlFor="lastName"></label>
+
+        <input
+          type="text"
+          placeholder="Last name"
+          name="lastName"
+          value={lastName}
+          onChange={(e) => setLastName(e.target.value)}
+        />
+      </div>
+
+      <button type="submit">Create</button>
     </form>
   );
 };
