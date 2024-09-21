@@ -90,7 +90,22 @@ export const ManageAppointmentForm = (props) => {
         />
       </div>
 
+      {/* TODO: (2024/09/21, 23:09)
+                extract the creation of the buttons out of here
+                and recall that they should be
+
+                  Create
+
+                  or
+
+                  Save + Cancel
+      */}
       <button type="submit">{managementAction}</button>
+      {managementAction === "Edit" && (
+        <button type="submit" onClick={() => setAppointmentForEditing(null)}>
+          Cancel
+        </button>
+      )}
     </form>
   );
 };

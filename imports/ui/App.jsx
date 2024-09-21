@@ -93,6 +93,14 @@ export const App = () => {
               </button>
             </div> */}
 
+            {/* TODO: (2024/09/21, 23:10)
+                      implement a single input
+                      for serve for filtering the displayed list of appointments
+                      by first name and last name, starting from the first character of each
+                      
+                      the displayed list should update dynamically
+                      as the user is typing in the input
+            */}
             <ul className="appointments">
               {appointments.map((appointment) => (
                 <Appointment
