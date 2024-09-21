@@ -19,17 +19,22 @@ export const ManageAppointmentForm = () => {
   //   setText("");
   // };
 
+  const managementAction = "Create";
+
   return (
     <form
-      className="task-form"
+      className="manage-appointment-form"
       // onSubmit={handleSubmit}
     >
+      <div>
+        <span>{`${managementAction}`} appointment</span>
+      </div>
       <div>
         <label htmlFor="date"></label>
 
         <input
           type="text" // TODO: (2024/09/21, 21:36) - is there a `date`?
-          placeholder="Type to add new tasks"
+          placeholder="Date for appointment"
           name="date"
           value={date}
           onChange={(e) => setDate(e.target.value)}
@@ -60,7 +65,7 @@ export const ManageAppointmentForm = () => {
         />
       </div>
 
-      <button type="submit">Create</button>
+      <button type="submit">{`${managementAction}`}</button>
     </form>
   );
 };
