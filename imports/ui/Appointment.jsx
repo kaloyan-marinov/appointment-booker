@@ -1,4 +1,5 @@
 import React from "react";
+import { convertDateToString } from "../utilities";
 
 export const Appointment = (props) => {
   /*
@@ -21,7 +22,10 @@ export const Appointment = (props) => {
         onClick={() => onCheckboxClick(task)}
         readOnly
       /> */}
-      <span>{appointment.text}</span>
+      <span>
+        {appointment.firstName} {appointment.lastName} @{" "}
+        {convertDateToString(appointment.date)}
+      </span>
       <button onClick={() => onDeleteClick(appointment)}>&times;</button>
     </li>
   );

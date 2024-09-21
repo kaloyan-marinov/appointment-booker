@@ -57,9 +57,9 @@ export const App = () => {
   // }
 
   const appointments = [
-    { _id: 1, text: "Alice", date: new Date() },
-    { _id: 2, text: "Bob", date: new Date() },
-    { _id: 3, text: "Charlie", date: new Date() },
+    { _id: 1, fistName: "Alice", lastName: "Allison", date: new Date() },
+    { _id: 2, firstName: "Bob", lastName: "Baker", date: new Date() },
+    { _id: 3, firstName: "Charlie", lastName: "Chaplin", date: new Date() },
   ];
 
   const logout = () => Meteor.logout();
