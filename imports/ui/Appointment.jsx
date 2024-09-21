@@ -1,6 +1,6 @@
 import React from "react";
 
-export const Task = (props) => {
+export const Appointment = (props) => {
   /*
   console.log(task.isChecked); // -> undefined
   console.log(typeof task.isChecked); // -> undefined

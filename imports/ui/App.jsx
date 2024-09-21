@@ -1,7 +1,7 @@
 import React, { useState, Fragment } from "react";
 import { useTracker, useSubscribe } from "meteor/react-meteor-data";
 import { TasksCollection } from "/imports/api/TasksCollection";
-import { Task } from "./Task";
+import { Appointment } from "./Appointment";
 import { TaskForm } from "./TaskForm";
 import { LoginForm } from "./LoginForm";
 
@@ -92,7 +92,7 @@ export const App = () => {
 
             <ul className="appointments">
               {appointments.map((appointment) => (
-                <Task
+                <Appointment
                   key={appointment._id}
                   appointment={appointment}
                   // onCheckboxClick={handleToggleChecked}
