@@ -24,6 +24,10 @@ export const App = () => {
     });
   };
 
+  const handleDelete = ({ _id }) => {
+    Meteor.callAsync("tasks.delete", { _id });
+  };
+
   if (isLoading()) {
     return <div>Loading...</div>;
   }
@@ -39,6 +43,7 @@ export const App = () => {
             key={task._id}
             task={task}
             onCheckboxClick={handleToggleChecked}
+            onDeleteClick={handleDelete}
           />
         ))}
       </ul>
