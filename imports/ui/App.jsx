@@ -7,54 +7,60 @@ import { LoginForm } from "./LoginForm";
 
 export const App = () => {
   const user = useTracker(() => Meteor.user());
-  const [hideCompleted, setHideCompleted] = useState(false);
-  const isLoading = useSubscribe("tasks");
+  // const [hideCompleted, setHideCompleted] = useState(false);
+  // const isLoading = useSubscribe("tasks");
 
-  const hideCompletedFilter = {
-    isChecked: {
-      $ne: true,
-    },
-  };
+  // const hideCompletedFilter = {
+  //   isChecked: {
+  //     $ne: true,
+  //   },
+  // };
 
-  const pendingTasksCount = useTracker(() => {
-    if (!user) {
-      return 0;
-    }
+  // const pendingTasksCount = useTracker(()                                                                => {
+  //   if (!user) {
+  //     return 0;
+  //   }
 
-    return TasksCollection.find(hideCompletedFilter).count();
-  });
+  //   return TasksCollection.find(hideCompletedFilter).count();
+  // });
 
-  const tasks = useTracker(() => {
-    if (!user) {
-      return [];
-    }
+  // const tasks = useTracker(() => {
+  //   if (!user) {
+  //     return [];
+  //   }
 
-    return TasksCollection.find(hideCompleted ? hideCompletedFilter : {}, {
-      sort: {
-        createdAt: -1,
-      },
-    }).fetch();
-  });
+  //   return TasksCollection.find(hideCompleted ? hideCompletedFilter : {}, {
+  //     sort: {
+  //       createdAt: -1,
+  //     },
+  //   }).fetch();
+  // });
 
-  const pendingTasksTitle = `${
-    pendingTasksCount ? ` (${pendingTasksCount})` : ""
-  }`;
-  console.log("pendingTasksTitle", pendingTasksTitle);
+  // const pendingTasksTitle = `${
+  //   pendingTasksCount ? ` (${pendingTasksCount})` : ""
+  // }`;
+  // console.log("pendingTasksTitle", pendingTasksTitle);
 
-  const handleToggleChecked = ({ _id, isChecked }) => {
-    Meteor.callAsync("tasks.toggleChecked", {
-      _id,
-      isChecked,
-    });
-  };
+  // const handleToggleChecked = ({ _id, isChecked }) => {
+  //   Meteor.callAsync("tasks.toggleChecked", {
+  //     _id,
+  //     isChecked,
+  //   });
+  // };
 
-  const handleDelete = ({ _id }) => {
-    Meteor.callAsync("tasks.delete", { _id });
-  };
+  // const handleDelete = ({ _id }) => {
+  //   Meteor.callAsync("tasks.delete", { _id });
+  // };
 
-  if (isLoading()) {
-    return <div>Loading...</div>;
-  }
+  // if (isLoading()) {
+  //   return <div>Loading...</div>;
+  // }
+
+  const appointments = [
+    { _id: 1, text: "Alice", date: new Date() },
+    { _id: 2, text: "Bob", date: new Date() },
+    { _id: 3, text: "Charlie", date: new Date() },
+  ];
 
   const logout = () => Meteor.logout();
 
@@ -63,7 +69,8 @@ export const App = () => {
       <header>
         <div className="app-bar">
           <div className="app-header">
-            <h1>Appointment Booker {pendingTasksTitle}</h1>
+            {/* <h1>Appointment Booker {pendingTasksTitle}</h1> */}
+            <h1>Appointment Booker</h1>
           </div>
         </div>
       </header>
@@ -77,19 +84,19 @@ export const App = () => {
 
             <TaskForm />
 
-            <div className="filter">
+            {/* <div className="filter">
               <button onClick={() => setHideCompleted(!hideCompleted)}>
                 {hideCompleted ? "Show All" : "Hide Completed"}
               </button>
-            </div>
+            </div> */}
 
-            <ul className="tasks">
-              {tasks.map((task) => (
+            <ul className="appointments">
+              {appointments.map((appointment) => (
                 <Task
-                  key={task._id}
-                  task={task}
-                  onCheckboxClick={handleToggleChecked}
-                  onDeleteClick={handleDelete}
+                  key={appointment._id}
+                  appointment={appointment}
+                  // onCheckboxClick={handleToggleChecked}
+                  // onDeleteClick={handleDelete}
                 />
               ))}
             </ul>

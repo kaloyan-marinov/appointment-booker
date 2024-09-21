@@ -1,6 +1,6 @@
 import React from "react";
 
-export const Task = ({ task, onCheckboxClick, onDeleteClick }) => {
+export const Task = (props) => {
   /*
   console.log(task.isChecked); // -> undefined
   console.log(typeof task.isChecked); // -> undefined
@@ -11,17 +11,18 @@ export const Task = ({ task, onCheckboxClick, onDeleteClick }) => {
   console.log(!!task.isChecked); // -> false
   console.log(typeof !!task.isChecked); // -> boolean
   */
+  const { appointment } = props;
 
   return (
     <li>
-      <input
+      {/* <input
         type="checkbox"
         checked={!!task.isChecked}
         onClick={() => onCheckboxClick(task)}
         readOnly
-      />
-      <span>{task.text}</span>
-      <button onClick={() => onDeleteClick(task)}>&times;</button>
+      /> */}
+      <span>{appointment.text}</span>
+      <button onClick={() => onDeleteClick(appointment)}>&times;</button>
     </li>
   );
 };
