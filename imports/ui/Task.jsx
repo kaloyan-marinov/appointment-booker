@@ -1,6 +1,7 @@
 import React from "react";
 
 export const Task = ({ task, onCheckboxClick, onDeleteClick }) => {
+  /*
   console.log(task.isChecked); // -> undefined
   console.log(typeof task.isChecked); // -> undefined
 
@@ -9,6 +10,7 @@ export const Task = ({ task, onCheckboxClick, onDeleteClick }) => {
 
   console.log(!!task.isChecked); // -> false
   console.log(typeof !!task.isChecked); // -> boolean
+  */
 
   return (
     <li>
