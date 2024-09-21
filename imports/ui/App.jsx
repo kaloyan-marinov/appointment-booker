@@ -2,7 +2,7 @@ import React, { useState, Fragment } from "react";
 import { useTracker, useSubscribe } from "meteor/react-meteor-data";
 import { TasksCollection } from "/imports/api/TasksCollection";
 import { Appointment } from "./Appointment";
-import { TaskForm } from "./TaskForm";
+import { ManageAppointmentForm } from "./ManageAppointmentForm";
 import { LoginForm } from "./LoginForm";
 
 export const App = () => {
@@ -82,7 +82,7 @@ export const App = () => {
               {user.username}
             </div>
 
-            <TaskForm />
+            <ManageAppointmentForm />
 
             {/* <div className="filter">
               <button onClick={() => setHideCompleted(!hideCompleted)}>

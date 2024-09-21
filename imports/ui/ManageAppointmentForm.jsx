@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 // import { TasksCollection } from "/imports/api/TasksCollection";
 
-export const TaskForm = () => {
+export const ManageAppointmentForm = () => {
   const [date, setDate] = useState(""); // TODO: (2024/09/21, 21:36) - is there a `date`?
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
