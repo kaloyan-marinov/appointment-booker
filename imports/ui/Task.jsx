@@ -1,5 +1,25 @@
 import React from "react";
 
-export const Task = ({ task }) => {
-  return <li>{task.text} </li>;
+export const Task = ({ task, onCheckboxClick, onDeleteClick }) => {
+  console.log(task.isChecked); // -> undefined
+  console.log(typeof task.isChecked); // -> undefined
+
+  console.log(!task.isChecked); // -> true
+  console.log(typeof !task.isChecked); // -> boolean
+
+  console.log(!!task.isChecked); // -> false
+  console.log(typeof !!task.isChecked); // -> boolean
+
+  return (
+    <li>
+      <input
+        type="checkbox"
+        checked={!!task.isChecked}
+        onClick={() => onCheckboxClick(task)}
+        readOnly
+      />
+      <span>{task.text}</span>
+      <button onClick={() => onDeleteClick(task)}>&times;</button>
+    </li>
+  );
 };
