@@ -13,27 +13,33 @@ export const LoginForm = () => {
 
   return (
     <form onSubmit={submit} className="login-form">
-      <label htmlForm="username">Username</label>
+      <div>
+        <label htmlForm="username">Username</label>
 
-      <input
-        type="text"
-        placeholder="Username"
-        name="username"
-        required
-        onChange={(e) => setUsername(e.target.value)}
-      />
+        <input
+          type="text"
+          placeholder="Username"
+          name="username"
+          required
+          onChange={(e) => setUsername(e.target.value)}
+        />
+      </div>
 
-      <label htmlForm="password">Password</label>
+      <div>
+        <label htmlForm="password">Password</label>
 
-      <input
-        type="password"
-        placeholder="Password"
-        name="password"
-        required
-        onChange={(e) => setPassword(e.target.value)}
-      />
+        <input
+          type="password"
+          placeholder="Password"
+          name="password"
+          required
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      </div>
 
-      <button type="submit">Log In</button>
+      <div>
+        <button type="submit">Log In</button>
+      </div>
     </form>
   );
 };
