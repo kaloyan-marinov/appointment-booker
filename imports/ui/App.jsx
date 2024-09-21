@@ -17,16 +17,24 @@ export const App = () => {
   };
 
   const pendingTasksCount = useTracker(() => {
+    if (!user) {
+      return 0;
+    }
+
     return TasksCollection.find(hideCompletedFilter).count();
   });
 
-  const tasks = useTracker(() =>
-    TasksCollection.find(hideCompleted ? hideCompletedFilter : {}, {
+  const tasks = useTracker(() => {
+    if (!user) {
+      return [];
+    }
+
+    return TasksCollection.find(hideCompleted ? hideCompletedFilter : {}, {
       sort: {
         createdAt: -1,
       },
-    }).fetch()
-  );
+    }).fetch();
+  });
 
   const pendingTasksTitle = `${
     pendingTasksCount ? ` (${pendingTasksCount})` : ""
