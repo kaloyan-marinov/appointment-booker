@@ -6,7 +6,16 @@ import { TaskForm } from "./TaskForm";
 
 export const App = () => {
   const isLoading = useSubscribe("tasks");
-  const tasks = useTracker(() => TasksCollection.find({}).fetch());
+  const tasks = useTracker(() =>
+    TasksCollection.find(
+      {},
+      {
+        sort: {
+          createdAt: -1,
+        },
+      }
+    ).fetch()
+  );
 
   if (isLoading()) {
     return <div>Loading...</div>;
