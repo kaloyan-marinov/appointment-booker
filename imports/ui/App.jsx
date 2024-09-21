@@ -5,6 +5,12 @@ import { Appointment } from "./Appointment";
 import { ManageAppointmentForm } from "./ManageAppointmentForm";
 import { LoginForm } from "./LoginForm";
 
+const appointments = [
+  { _id: 1, firstName: "Alice", lastName: "Allison", date: new Date() },
+  { _id: 2, firstName: "Bob", lastName: "Baker", date: new Date() },
+  { _id: 3, firstName: "Charlie", lastName: "Chaplin", date: new Date() },
+];
+
 export const App = () => {
   const user = useTracker(() => Meteor.user());
   const [appointmentForEditing, setAppointmentForEditing] = useState(null);
@@ -55,12 +61,6 @@ export const App = () => {
   // if (isLoading()) {
   //   return <div>Loading...</div>;
   // }
-
-  const appointments = [
-    { _id: 1, fistName: "Alice", lastName: "Allison", date: new Date() },
-    { _id: 2, firstName: "Bob", lastName: "Baker", date: new Date() },
-    { _id: 3, firstName: "Charlie", lastName: "Chaplin", date: new Date() },
-  ];
 
   const logout = () => Meteor.logout();
 
