@@ -26,3 +26,23 @@ This allows the container
 to access services running on the host
 using `127.0.0.1`.
 )
+
+```bash
+meteor [direct: primary] meteor> show tables;
+tasks
+users
+
+meteor [direct: primary] meteor> db.users.find()
+[
+  {
+    _id: 'z4nCiKS6249DcYxB6',
+    createdAt: ISODate('2024-09-21T12:16:52.549Z'),
+    services: {
+      password: {
+        bcrypt: '$2b$10$lPp7jhRf87SwBhI9mc7m9ecs7oFLIGW5kQbTvyCmm33oCMYmnMnhi'
+      }
+    },
+    username: 'meteorite'
+  }
+]
+```
