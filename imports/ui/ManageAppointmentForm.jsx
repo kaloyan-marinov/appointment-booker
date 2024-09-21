@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 // import { TasksCollection } from "/imports/api/TasksCollection";
 
-export const ManageAppointmentForm = () => {
+export const ManageAppointmentForm = (props) => {
   const [date, setDate] = useState(""); // TODO: (2024/09/21, 21:36) - is there a `date`?
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+
+  const { apptIdForEditing, setApptIdForEditing } = props;
 
   // const handleSubmit = async (e) => {
   //   e.preventDefault();
@@ -18,6 +20,17 @@ export const ManageAppointmentForm = () => {
 
   //   setText("");
   // };
+
+  if (apptIdForEditing) {
+    return (
+      <form className="manage-appointment-form">
+        <div>
+          <span>_EDIT_ appointment ID: {apptIdForEditing}</span>
+        </div>
+        <button onClick={() => setApptIdForEditing(null)}>Cancel</button>
+      </form>
+    );
+  }
 
   const managementAction = "Create";
 

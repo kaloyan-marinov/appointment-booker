@@ -12,7 +12,7 @@ export const Appointment = (props) => {
   console.log(!!task.isChecked); // -> false
   console.log(typeof !!task.isChecked); // -> boolean
   */
-  const { appointment } = props;
+  const { appointment, setApptIdForEditing } = props;
 
   return (
     <li>
@@ -26,7 +26,7 @@ export const Appointment = (props) => {
         {convertDateToString(appointment.date)} - {appointment.firstName}{" "}
         {appointment.lastName}
       </span>
-      <button onClick={() => onDeleteClick(appointment)}>&times;</button>
+      <button onClick={() => setApptIdForEditing(appointment._id)}>Edit</button>
     </li>
   );
 };

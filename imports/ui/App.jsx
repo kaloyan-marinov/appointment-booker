@@ -7,7 +7,7 @@ import { LoginForm } from "./LoginForm";
 
 export const App = () => {
   const user = useTracker(() => Meteor.user());
-  // const [hideCompleted, setHideCompleted] = useState(false);
+  const [apptIdForEditing, setApptIdForEditing] = useState(null);
   // const isLoading = useSubscribe("tasks");
 
   // const hideCompletedFilter = {
@@ -82,7 +82,10 @@ export const App = () => {
               {user.username}
             </div>
 
-            <ManageAppointmentForm />
+            <ManageAppointmentForm
+              apptIdForEditing={apptIdForEditing}
+              setApptIdForEditing={setApptIdForEditing}
+            />
 
             {/* <div className="filter">
               <button onClick={() => setHideCompleted(!hideCompleted)}>
@@ -96,7 +99,7 @@ export const App = () => {
                   key={appointment._id}
                   appointment={appointment}
                   // onCheckboxClick={handleToggleChecked}
-                  // onDeleteClick={handleDelete}
+                  setApptIdForEditing={setApptIdForEditing}
                 />
               ))}
             </ul>
