@@ -14,22 +14,29 @@ const insertTask = (taskText, user) => {
 
 // TODO: (2024/09/21, 14:17)
 //      avoid hardcoding the following values
-const SEED_USERNAME = "meteorite";
-const SEED_PASSWORD = "password";
+const USER_1_USERNAME = "test1";
+const USER_1_PASSWORD = "pass1";
+const USER_2_USERNAME = "test2";
+const USER_2_PASSWORD = "pass2";
 
 Meteor.startup(async () => {
   // TODO: (2024/09/21, 14:18)
   //      look into why VS Code issues a warning for each of the next 3 uses of `await`,
   //      with said warning reading
   //      "'await' has no effect on the type of this expression.ts(80007)"
-  if (!(await Accounts.findUserByUsername(SEED_USERNAME))) {
-    await Accounts.createUser({
-      username: SEED_USERNAME,
-      password: SEED_PASSWORD,
-    });
+  for (const [username, password] of [
+    [USER_1_USERNAME, USER_1_PASSWORD],
+    [USER_2_USERNAME, USER_2_PASSWORD],
+  ]) {
+    if (!(await Accounts.findUserByUsername(username))) {
+      await Accounts.createUser({
+        username,
+        password,
+      });
+    }
   }
 
-  const user = await Accounts.findUserByUsername(SEED_USERNAME);
+  const user1 = await Accounts.findUserByUsername(USER_1_USERNAME);
 
   if ((await TasksCollection.find().countAsync()) === 0) {
     [
@@ -40,6 +47,6 @@ Meteor.startup(async () => {
       "Task 5",
       "Task 6",
       "Task 7",
-    ].forEach((taskText) => insertTask(taskText, user));
+    ].forEach((taskText) => insertTask(taskText, user1));
   }
 });
