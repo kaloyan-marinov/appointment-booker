@@ -14,7 +14,7 @@ export const LoginForm = () => {
   return (
     <form onSubmit={submit} className="login-form">
       <div>
-        <label htmlForm="username">Username</label>
+        <label htmlFor="username">Username</label>
 
         <input
           type="text"
@@ -26,7 +26,7 @@ export const LoginForm = () => {
       </div>
 
       <div>
-        <label htmlForm="password">Password</label>
+        <label htmlFor="password">Password</label>
 
         <input
           type="password"
