@@ -6,7 +6,7 @@ export const ManageAppointmentForm = (props) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
 
-  const { apptIdForEditing, setApptIdForEditing } = props;
+  const { appointmentForEditing, setAppointmentForEditing } = props;
 
   // const handleSubmit = async (e) => {
   //   e.preventDefault();
@@ -21,13 +21,13 @@ export const ManageAppointmentForm = (props) => {
   //   setText("");
   // };
 
-  if (apptIdForEditing) {
+  if (appointmentForEditing) {
     return (
       <form className="manage-appointment-form">
         <div>
-          <span>_EDIT_ appointment ID: {apptIdForEditing}</span>
+          <span>_EDIT_ appointment ID: {appointmentForEditing._id}</span>
         </div>
-        <button onClick={() => setApptIdForEditing(null)}>Cancel</button>
+        <button onClick={() => setAppointmentForEditing(null)}>Cancel</button>
       </form>
     );
   }
