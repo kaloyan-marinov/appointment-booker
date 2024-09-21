@@ -90,7 +90,7 @@ export const ManageAppointmentForm = (props) => {
         />
       </div>
 
-      <button type="submit">{`${managementAction}`}</button>
+      <button type="submit">{managementAction}</button>
     </form>
   );
 };
