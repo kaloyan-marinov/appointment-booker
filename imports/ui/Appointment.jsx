@@ -23,8 +23,8 @@ export const Appointment = (props) => {
         readOnly
       /> */}
       <span>
-        {appointment.firstName} {appointment.lastName} @{" "}
-        {convertDateToString(appointment.date)}
+        {convertDateToString(appointment.date)} - {appointment.firstName}{" "}
+        {appointment.lastName}
       </span>
       <button onClick={() => onDeleteClick(appointment)}>&times;</button>
     </li>

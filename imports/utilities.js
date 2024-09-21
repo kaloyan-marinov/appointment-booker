@@ -2,29 +2,25 @@ export const convertDateToString = (date) => {
   /*
   When run on a machine in GMT+2,
   this function converts `2024-09-21T19:13:14.270Z`
-  to `(GMT+2) 09/21/2024 (Saturday), 21:13`
+  to `(GMT+2) 2024-09-21 (Saturday), 21:13`
   */
-  const options = {
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-    weekday: "long", // Full weekday name
-    hour: "2-digit",
-    hour12: false, // Use 24-hour format
-    minute: "2-digit",
-    timeZoneName: "short", // Abbreviated timezone name
-  };
+  // Get individual date components
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0"); // Month is 0-indexed, so we add 1
+  const day = String(date.getDate()).padStart(2, "0");
+  const hours = String(date.getHours()).padStart(2, "0"); // 24-hour format
+  const minutes = String(date.getMinutes()).padStart(2, "0");
 
-  const formattedDate = new Intl.DateTimeFormat(undefined, options).format(
-    date
-  );
+  // Get the full weekday name
+  const weekday = date.toLocaleString("en-US", { weekday: "long" });
 
-  // Reorder to match the required format "(timezone) YYYY-MM-DD (weekday), HH:MM"
-  const [weekdayPart, datePart, timeAndTimeZonePart] =
-    formattedDate.split(", ");
-  const [timePart, timeZonePart] = timeAndTimeZonePart.split(" ");
+  // Get the timezone abbreviation
+  const timezone = date
+    .toLocaleTimeString("en-us", { timeZoneName: "short" })
+    .split(" ")[2];
 
-  const result = `(${timeZonePart}) ${datePart} (${weekdayPart}), ${timePart}`;
+  // Format the date string
+  const result = `(${timezone}) ${year}-${month}-${day} (${weekday}), ${hours}:${minutes}`;
 
   return result;
 };
