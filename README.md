@@ -1,3 +1,5 @@
+<u>TODO: (2024/09/21, 20:24)</u>: remove the Meteor packages calles `insecure` and `autopublish`
+
 navigate into the project folder and run:
 
 ```bash
@@ -11,7 +13,7 @@ connect to the MongoDB server:
 ```bash
 docker run \
     --network host \
-    --name container-m-j-3-mongosh \
+    --name container-a-b-mongosh \
     -it \
     --rm \
     mongodb/mongodb-community-server:6.0.12-ubuntu2204 \
