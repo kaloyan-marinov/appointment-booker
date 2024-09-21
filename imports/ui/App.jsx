@@ -17,6 +17,13 @@ export const App = () => {
     ).fetch()
   );
 
+  const handleToggleChecked = ({ _id, isChecked }) => {
+    Meteor.callAsync("tasks.toggleChecked", {
+      _id,
+      isChecked,
+    });
+  };
+
   if (isLoading()) {
     return <div>Loading...</div>;
   }
@@ -28,7 +35,11 @@ export const App = () => {
 
       <ul>
         {tasks.map((task) => (
-          <Task key={task._id} task={task} />
+          <Task
+            key={task._id}
+            task={task}
+            onCheckboxClick={handleToggleChecked}
+          />
         ))}
       </ul>
     </div>
