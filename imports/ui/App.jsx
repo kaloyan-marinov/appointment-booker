@@ -48,6 +48,8 @@ export const App = () => {
     return <div>Loading...</div>;
   }
 
+  const logout = () => Meteor.logout();
+
   return (
     <div className="app">
       <header>
@@ -61,6 +63,10 @@ export const App = () => {
       <div className="main">
         {user ? (
           <Fragment>
+            <div className="user" onClick={logout}>
+              {user.username}
+            </div>
+
             <TaskForm />
 
             <div className="filter">
