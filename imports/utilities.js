@@ -1,3 +1,6 @@
+// TODO: (2024/09/21, 22:14)
+//      get rid of the time
+//      (i.e. "Date" means "just the date, no time")
 export const convertDateToString = (date) => {
   /*
   When run on a machine in GMT+2,
