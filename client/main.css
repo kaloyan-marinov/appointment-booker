@@ -30,10 +30,6 @@ button:focus {
   outline: 0;
 }
 
-.task-form {
-  margin-top: 1rem;
-}
-
 .app {
   display: flex;
   flex-direction: column;
@@ -55,7 +51,7 @@ button:focus {
   background: white;
 }
 
-.main:-webkit-scrollbar {
+.main::-webkit-scrollbar {
   width: 0;
   height: 0;
   background: inherit;
