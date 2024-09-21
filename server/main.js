@@ -6,6 +6,7 @@ import "../imports/api/tasksMethods";
 const insertTask = (taskText) => {
   TasksCollection.insertAsync({
     text: taskText,
+    createdAt: new Date(),
   });
 };
 

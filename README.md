@@ -4,6 +4,8 @@ navigate into the project folder and run:
 ~/.meteor/meteor run
 ```
 
+if your development machine is running a Linux OS,
+you can use the following command in order to
 connect to the MongoDB server:
 
 ```bash
@@ -17,8 +19,10 @@ docker run \
             mongodb://127.0.0.1:3001/meteor
 ```
 
+(
 On Linux, you can use the `--network host` option
 to make the container share the host’s network namespace.
 This allows the container
 to access services running on the host
 using `127.0.0.1`.
+)
