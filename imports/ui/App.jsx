@@ -14,6 +14,10 @@ export const App = () => {
     },
   };
 
+  const pendingTasksCount = useTracker(() => {
+    return TasksCollection.find(hideCompletedFilter).count();
+  });
+
   const tasks = useTracker(() =>
     TasksCollection.find(hideCompleted ? hideCompletedFilter : {}, {
       sort: {
@@ -21,6 +25,11 @@ export const App = () => {
       },
     }).fetch()
   );
+
+  const pendingTasksTitle = `${
+    pendingTasksCount ? ` (${pendingTasksCount})` : ""
+  }`;
+  console.log("pendingTasksTitle", pendingTasksTitle);
 
   const handleToggleChecked = ({ _id, isChecked }) => {
     Meteor.callAsync("tasks.toggleChecked", {
@@ -42,7 +51,7 @@ export const App = () => {
       <header>
         <div className="app-bar">
           <div className="app-header">
-            <h1>To Do List</h1>
+            <h1>To Do List {pendingTasksTitle}</h1>
           </div>
         </div>
       </header>
