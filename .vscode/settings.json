@@ -2,6 +2,7 @@
     "editor.rulers": [
         88, 100
     ],
+    "editor.tabSize": 2,
 
     // Controls if suggestions should be accepted the 'Enter' key
     // - in addition to via the 'Tab' key.
