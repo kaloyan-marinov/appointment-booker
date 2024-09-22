@@ -14,7 +14,7 @@ import { LoginForm } from "./LoginForm";
 export const App = () => {
   const user = useTracker(() => Meteor.user());
   const [appointmentForEditing, setAppointmentForEditing] = useState(null);
-  // const isLoading = useSubscribe("tasks");
+  const isLoading = useSubscribe("appointments");
 
   // const hideCompletedFilter = {
   //   isChecked: {
@@ -30,17 +30,22 @@ export const App = () => {
   //   return AppointmentsCollection.find(hideCompletedFilter).count();
   // });
 
-  // const tasks = useTracker(() => {
-  //   if (!user) {
-  //     return [];
-  //   }
+  const appointments = useTracker(() => {
+    if (!user) {
+      return [];
+    }
 
-  //   return AppointmentsCollection.find(hideCompleted ? hideCompletedFilter : {}, {
-  //     sort: {
-  //       createdAt: -1,
-  //     },
-  //   }).fetch();
-  // });
+    const appts = AppointmentsCollection.find(
+      {},
+      {
+        sort: {
+          date: -1,
+        },
+      }
+    ).fetch();
+
+    return appts;
+  });
 
   // const pendingTasksTitle = `${
   //   pendingTasksCount ? ` (${pendingTasksCount})` : ""
@@ -58,9 +63,9 @@ export const App = () => {
   //   Meteor.callAsync("tasks.delete", { _id });
   // };
 
-  // if (isLoading()) {
-  //   return <div>Loading...</div>;
-  // }
+  if (isLoading()) {
+    return <div>Loading...</div>;
+  }
 
   const logout = () => Meteor.logout();
 

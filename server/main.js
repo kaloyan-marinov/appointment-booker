@@ -1,7 +1,7 @@
 import { Meteor } from "meteor/meteor";
 import { Accounts } from "meteor/accounts-base";
 import { AppointmentsCollection } from "/imports/api/AppointmentsCollection";
-import "../imports/api/TasksPublications";
+import "../imports/api/AppointmentsPublications";
 import "../imports/api/tasksMethods";
 
 const RAW_APPOINTMENTS = [

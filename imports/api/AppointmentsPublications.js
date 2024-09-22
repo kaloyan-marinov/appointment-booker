@@ -1,7 +1,7 @@
 import { Meteor } from "meteor/meteor";
 import { AppointmentsCollection } from "./AppointmentsCollection";
 
-Meteor.publish("tasks", function () {
+Meteor.publish("appointments", function () {
   const userId = this.userId;
 
   if (!userId) {
