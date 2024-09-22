@@ -4,7 +4,13 @@ import { AppointmentsCollection } from "/imports/api/AppointmentsCollection";
 import "../imports/api/AppointmentsPublications";
 import "../imports/api/tasksMethods";
 
-const RAW_APPOINTMENTS = [
+const ARRAY_1_RAW_APPOINTMENTS = [
+  { firstName: "Alice", lastName: "Allison", date: new Date() },
+  { firstName: "Bob", lastName: "Baker", date: new Date() },
+  { firstName: "Charlie", lastName: "Chaplin", date: new Date() },
+];
+
+const ARRAY_2_RAW_APPOINTMENTS = [
   { firstName: "Donald", lastName: "Duck", date: new Date() },
   { firstName: "Daffy", lastName: "Duck", date: new Date() },
   { firstName: "Ellen", lastName: "Edwards", date: new Date() },
@@ -42,10 +48,15 @@ Meteor.startup(async () => {
   }
 
   const user1 = await Accounts.findUserByUsername(USER_1_USERNAME);
+  const user2 = await Accounts.findUserByUsername(USER_2_USERNAME);
 
   if ((await AppointmentsCollection.find().countAsync()) === 0) {
-    RAW_APPOINTMENTS.forEach((rawAppointment) =>
+    ARRAY_1_RAW_APPOINTMENTS.forEach((rawAppointment) =>
       insertAppointment(rawAppointment, user1)
+    );
+
+    ARRAY_2_RAW_APPOINTMENTS.forEach((rawAppointment) =>
+      insertAppointment(rawAppointment, user2)
     );
   }
 });
