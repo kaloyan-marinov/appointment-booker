@@ -4,11 +4,16 @@ import { AppointmentsCollection } from "/imports/api/AppointmentsCollection";
 import "../imports/api/TasksPublications";
 import "../imports/api/tasksMethods";
 
-const insertTask = (taskText, user) => {
+const RAW_APPOINTMENTS = [
+  { firstName: "Donald", lastName: "Duck", date: new Date() },
+  { firstName: "Daffy", lastName: "Duck", date: new Date() },
+  { firstName: "Ellen", lastName: "Edwards", date: new Date() },
+];
+
+const insertAppointment = (rawAppointment, user) => {
   AppointmentsCollection.insertAsync({
-    text: taskText,
+    ...rawAppointment,
     userId: user._id,
-    createdAt: new Date(),
   });
 };
 
@@ -39,14 +44,8 @@ Meteor.startup(async () => {
   const user1 = await Accounts.findUserByUsername(USER_1_USERNAME);
 
   if ((await AppointmentsCollection.find().countAsync()) === 0) {
-    [
-      "Task 1",
-      "Task 2",
-      "Task 3",
-      "Task 4",
-      "Task 5",
-      "Task 6",
-      "Task 7",
-    ].forEach((taskText) => insertTask(taskText, user1));
+    RAW_APPOINTMENTS.forEach((rawAppointment) =>
+      insertAppointment(rawAppointment, user1)
+    );
   }
 });
