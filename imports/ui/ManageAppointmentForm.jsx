@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-// import { TasksCollection } from "/imports/api/TasksCollection";
+// import { AppointmentsCollection } from "/imports/api/AppointmentsCollection";
 
 export const ManageAppointmentForm = (props) => {
   // The admissible values for the next state variable are

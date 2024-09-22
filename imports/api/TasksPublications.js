@@ -1,5 +1,5 @@
 import { Meteor } from "meteor/meteor";
-import { TasksCollection } from "./TasksCollection";
+import { AppointmentsCollection } from "./AppointmentsCollection";
 
 Meteor.publish("tasks", function () {
   const userId = this.userId;
@@ -8,7 +8,7 @@ Meteor.publish("tasks", function () {
     return this.ready();
   }
 
-  return TasksCollection.find({
+  return AppointmentsCollection.find({
     userId,
   });
 });

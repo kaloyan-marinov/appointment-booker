@@ -1,6 +1,6 @@
 import React, { useState, Fragment } from "react";
 import { useTracker, useSubscribe } from "meteor/react-meteor-data";
-import { TasksCollection } from "/imports/api/TasksCollection";
+import { AppointmentsCollection } from "/imports/api/AppointmentsCollection";
 import { Appointment } from "./Appointment";
 import { ManageAppointmentForm } from "./ManageAppointmentForm";
 import { LoginForm } from "./LoginForm";
@@ -27,7 +27,7 @@ export const App = () => {
   //     return 0;
   //   }
 
-  //   return TasksCollection.find(hideCompletedFilter).count();
+  //   return AppointmentsCollection.find(hideCompletedFilter).count();
   // });
 
   // const tasks = useTracker(() => {
@@ -35,7 +35,7 @@ export const App = () => {
   //     return [];
   //   }
 
-  //   return TasksCollection.find(hideCompleted ? hideCompletedFilter : {}, {
+  //   return AppointmentsCollection.find(hideCompleted ? hideCompletedFilter : {}, {
   //     sort: {
   //       createdAt: -1,
   //     },

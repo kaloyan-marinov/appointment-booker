@@ -1,21 +1,21 @@
 import { Meteor } from "meteor/meteor";
-import { TasksCollection } from "./TasksCollection";
+import { AppointmentsCollection } from "./AppointmentsCollection";
 
 Meteor.methods({
   "tasks.insert"(doc) {
-    return TasksCollection.insertAsync({
+    return AppointmentsCollection.insertAsync({
       ...doc,
       userId: this.userId,
     });
   },
   "tasks.toggleChecked"({ _id, isChecked }) {
-    return TasksCollection.updateAsync(_id, {
+    return AppointmentsCollection.updateAsync(_id, {
       $set: {
         isChecked: !isChecked,
       },
     });
   },
   "tasks.delete"({ _id }) {
-    return TasksCollection.removeAsync(_id);
+    return AppointmentsCollection.removeAsync(_id);
   },
 });

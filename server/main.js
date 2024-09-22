@@ -1,11 +1,11 @@
 import { Meteor } from "meteor/meteor";
 import { Accounts } from "meteor/accounts-base";
-import { TasksCollection } from "/imports/api/TasksCollection";
+import { AppointmentsCollection } from "/imports/api/AppointmentsCollection";
 import "../imports/api/TasksPublications";
 import "../imports/api/tasksMethods";
 
 const insertTask = (taskText, user) => {
-  TasksCollection.insertAsync({
+  AppointmentsCollection.insertAsync({
     text: taskText,
     userId: user._id,
     createdAt: new Date(),
@@ -38,7 +38,7 @@ Meteor.startup(async () => {
 
   const user1 = await Accounts.findUserByUsername(USER_1_USERNAME);
 
-  if ((await TasksCollection.find().countAsync()) === 0) {
+  if ((await AppointmentsCollection.find().countAsync()) === 0) {
     [
       "Task 1",
       "Task 2",
