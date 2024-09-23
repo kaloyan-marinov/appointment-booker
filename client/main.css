@@ -159,7 +159,7 @@ header {
   font-weight: bold;
 }
 
-.login-form > div > input, .manage-appointment-form > div > input {
+.login-form > div > input, .manage-appointment-form > div > input, .main > div > input {
   flex-grow: 1;
   box-sizing: border-box;
   padding: 10px 6px;
@@ -169,6 +169,11 @@ header {
   font-size: 1em;
   margin-right: 16px;
   margin-top: 4px;
+}
+
+.input-for-search {
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .login-form > div > input:focus, .login-form > div > input:focus {
