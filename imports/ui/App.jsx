@@ -49,7 +49,7 @@ export const App = () => {
       },
       {
         sort: {
-          date: -1,
+          datetime: -1,
         },
       }
     ).fetch();

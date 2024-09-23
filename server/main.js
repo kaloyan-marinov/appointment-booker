@@ -5,15 +5,15 @@ import "../imports/api/AppointmentsPublications";
 import "../imports/api/appointmentsMethods";
 
 const ARRAY_1_RAW_APPOINTMENTS = [
-  { firstName: "Alice", lastName: "Allison", date: new Date() },
-  { firstName: "Bob", lastName: "Baker", date: new Date() },
-  { firstName: "Charlie", lastName: "Chaplin", date: new Date() },
+  { firstName: "Alice", lastName: "Allison", datetime: new Date() },
+  { firstName: "Bob", lastName: "Baker", datetime: new Date() },
+  { firstName: "Charlie", lastName: "Chaplin", datetime: new Date() },
 ];
 
 const ARRAY_2_RAW_APPOINTMENTS = [
-  { firstName: "Donald", lastName: "Duck", date: new Date() },
-  { firstName: "Daffy", lastName: "Duck", date: new Date() },
-  { firstName: "Ellen", lastName: "Edwards", date: new Date() },
+  { firstName: "Donald", lastName: "Duck", datetime: new Date() },
+  { firstName: "Daffy", lastName: "Duck", datetime: new Date() },
+  { firstName: "Ellen", lastName: "Edwards", datetime: new Date() },
 ];
 
 const insertAppointment = (rawAppointment, user) => {
