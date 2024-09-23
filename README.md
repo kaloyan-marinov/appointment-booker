@@ -1,3 +1,20 @@
+# Introduction
+
+This repository implements a web application for managing appointments.
+
+There is a rudimentary authentication sub-system.
+
+An authenticated user is able to
+create new appointments,
+retrieve all appointments "owned" by that user,
+edit an exising appointment.
+
+Additionally, a basic search functionality is available to authenticated users.
+Once logged in, a user sees an input field,
+in which it is possible type to filter the user-owned appointments by first or last name.
+
+# How to set up the project
+
 install the project dependencies:
 
 ```bash
@@ -13,6 +30,15 @@ USER_1_USERNAME=test1 \
   USER_2_PASSWORD=pass2 \
   ~/.meteor/meteor run
 ```
+
+<u>the preceding command</u> creates:
+
+- a MongoDB database;
+- a Meteor.js server and a Meteor.js client;
+- 2 users in the MongoDB database; and
+- 20 appointments for each of those users (also in the database);
+
+---
 
 if your development machine is running a Linux OS,
 you can use the following command in order to
