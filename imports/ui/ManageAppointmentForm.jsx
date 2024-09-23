@@ -124,7 +124,7 @@ export const ManageAppointmentForm = (props) => {
         <label htmlFor="datetime"></label>
 
         <input
-          type="datetime-local" // TODO: (2024/09/21, 21:36) - is there a `datetime`?
+          type="datetime-local"
           placeholder="Datetime for appointment"
           name="datetime"
           value={datetime}
@@ -156,16 +156,6 @@ export const ManageAppointmentForm = (props) => {
         />
       </div>
 
-      {/* TODO: (2024/09/21, 23:09)
-                extract the creation of the management-actions out of here
-                and recall that they should be
-
-                  Create
-
-                  or
-
-                  Save + Cancel
-      */}
       <div className="management-actions">
         {managementAction === "Create" ? (
           <button type="submit">Create</button>
