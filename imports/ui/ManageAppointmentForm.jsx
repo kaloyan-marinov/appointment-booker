@@ -169,7 +169,16 @@ export const ManageAppointmentForm = (props) => {
       <div className="management-actions">
         <button type="submit">{managementAction}</button>
         {managementAction === "Edit" && (
-          <button type="submit" onClick={() => setAppointmentForEditing(null)}>
+          <button
+            type="button"
+            onClick={() => {
+              setManagementAction("Create");
+              setAppointmentForEditing(null);
+              setDate("");
+              setFirstName("");
+              setLastName("");
+            }}
+          >
             Cancel
           </button>
         )}
