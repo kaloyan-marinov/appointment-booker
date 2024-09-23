@@ -66,22 +66,6 @@ export const ManageAppointmentForm = (props) => {
 
     if (!datetime || !firstName || !lastName) return;
 
-    /*
-    TODO: (2024/09/23, 08:13)
-
-          motivated by
-          ```
-          const datetimeString = '2024-09-25T10:50';
-
-          // Convert the string to a Date object (interpreted as local timezone)
-          const datetime = new Date(datetimeString);
-
-          console.log(datetime.toString());   // Output the datetime with the local timezone attached
-          console.log(datetime.toISOString()); // Output the datetime in ISO 8601 format (UTC)
-          ```
-          change the names of variables that hold _datetime strings_ to `datetimeString`
-          and thus reserve `datetime` for variables that hold `Date` objects
-    */
     await Meteor.callAsync("appointments.insert", {
       datetime: new Date(datetime),
       firstName,
