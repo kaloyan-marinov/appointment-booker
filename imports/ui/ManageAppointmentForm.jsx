@@ -12,6 +12,14 @@ export const ManageAppointmentForm = (props) => {
 
   const { appointmentForEditing, setAppointmentForEditing } = props;
 
+  const resetFormFields = () => {
+    setManagementAction("Create");
+    setAppointmentForEditing(null);
+    setDate("");
+    setFirstName("");
+    setLastName("");
+  };
+
   if (
     appointmentForEditing &&
     date !== appointmentForEditing.date &&
@@ -80,11 +88,7 @@ export const ManageAppointmentForm = (props) => {
       lastName,
     });
 
-    setManagementAction("Create");
-    setAppointmentForEditing(null);
-    setDate("");
-    setFirstName("");
-    setLastName("");
+    resetFormFields();
   };
 
   const handleSubmitInEditForm = async (e) => {
@@ -101,11 +105,7 @@ export const ManageAppointmentForm = (props) => {
       },
     });
 
-    setManagementAction("Create");
-    setAppointmentForEditing(null);
-    setDate("");
-    setFirstName("");
-    setLastName("");
+    resetFormFields();
   };
 
   return (
@@ -169,16 +169,7 @@ export const ManageAppointmentForm = (props) => {
       <div className="management-actions">
         <button type="submit">{managementAction}</button>
         {managementAction === "Edit" && (
-          <button
-            type="button"
-            onClick={() => {
-              setManagementAction("Create");
-              setAppointmentForEditing(null);
-              setDate("");
-              setFirstName("");
-              setLastName("");
-            }}
-          >
+          <button type="button" onClick={() => resetFormFields()}>
             Cancel
           </button>
         )}
