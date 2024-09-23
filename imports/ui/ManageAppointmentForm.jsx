@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
 // import { AppointmentsCollection } from "/imports/api/AppointmentsCollection";
 
 export const ManageAppointmentForm = (props) => {
@@ -167,11 +167,15 @@ export const ManageAppointmentForm = (props) => {
                   Save + Cancel
       */}
       <div className="management-actions">
-        <button type="submit">{managementAction}</button>
-        {managementAction === "Edit" && (
-          <button type="button" onClick={() => resetFormFields()}>
-            Cancel
-          </button>
+        {managementAction === "Create" ? (
+          <button type="submit">Create</button>
+        ) : (
+          <Fragment>
+            <button type="submit">Save</button>
+            <button type="button" onClick={() => resetFormFields()}>
+              Cancel
+            </button>
+          </Fragment>
         )}
       </div>
     </form>
