@@ -1,12 +1,11 @@
 import React, { useState, Fragment } from "react";
-// import { AppointmentsCollection } from "/imports/api/AppointmentsCollection";
 
 export const ManageAppointmentForm = (props) => {
   // The admissible values for the next state variable are
   // "Create", "Edit".
   const [managementAction, setManagementAction] = useState("Create");
 
-  const [datetime, setDatetime] = useState(""); // TODO: (2024/09/21, 21:36) - is there a `datetime`?
+  const [datetime, setDatetime] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
 
@@ -31,11 +30,7 @@ export const ManageAppointmentForm = (props) => {
     // Format the datetime into 'YYYY-MM-DDTHH:MM' format
     // (The created string, obviously, does not include a timezone explicitly;
     // however, it "uses" the local time of the user's machine.)
-    /*
-    const strInISOFormat = appointmentForEditing.datetime.toISOString();
-    const strInISOFormatWithoutSeconds = strInISOFormat.slice(0, 16); // Remove the seconds and timezone
-    setDatetime(strInISOFormat);
-    */
+
     // Format datetime in local time as 'YYYY-MM-DDTHH:MM'
     const datetime = appointmentForEditing.datetime;
 
@@ -51,14 +46,6 @@ export const ManageAppointmentForm = (props) => {
 
     setFirstName(appointmentForEditing.firstName);
     setLastName(appointmentForEditing.lastName);
-    // return (
-    //   <form className="manage-appointment-form">
-    //     <div>
-    //       <span>_EDIT_ appointment ID: {appointmentForEditing._id}</span>
-    //     </div>
-    //     <button onClick={() => setAppointmentForEditing(null)}>Cancel</button>
-    //   </form>
-    // );
   }
 
   const handleSubmitInCreateForm = async (e) => {
