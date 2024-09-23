@@ -23,12 +23,10 @@ const insertAppointment = (rawAppointment, user) => {
   });
 };
 
-// TODO: (2024/09/21, 14:17)
-//      avoid hardcoding the following values
-const USER_1_USERNAME = "test1";
-const USER_1_PASSWORD = "pass1";
-const USER_2_USERNAME = "test2";
-const USER_2_PASSWORD = "pass2";
+const USER_1_USERNAME = process.env.USER_1_USERNAME;
+const USER_1_PASSWORD = process.env.USER_1_PASSWORD;
+const USER_2_USERNAME = process.env.USER_2_USERNAME;
+const USER_2_PASSWORD = process.env.USER_2_PASSWORD;
 
 Meteor.startup(async () => {
   // TODO: (2024/09/21, 14:18)

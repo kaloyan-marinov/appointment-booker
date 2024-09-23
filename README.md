@@ -3,7 +3,11 @@
 navigate into the project folder and run:
 
 ```bash
-~/.meteor/meteor run
+USER_1_USERNAME=test1 \
+  USER_1_PASSWORD=pass1 \
+  USER_2_USERNAME=test2 \
+  USER_2_PASSWORD=pass2 \
+  ~/.meteor/meteor run
 ```
 
 if your development machine is running a Linux OS,
