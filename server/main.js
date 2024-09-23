@@ -2,7 +2,7 @@ import { Meteor } from "meteor/meteor";
 import { Accounts } from "meteor/accounts-base";
 import { AppointmentsCollection } from "/imports/api/AppointmentsCollection";
 import "../imports/api/AppointmentsPublications";
-import "../imports/api/tasksMethods";
+import "../imports/api/appointmentsMethods";
 
 const ARRAY_1_RAW_APPOINTMENTS = [
   { firstName: "Alice", lastName: "Allison", date: new Date() },
