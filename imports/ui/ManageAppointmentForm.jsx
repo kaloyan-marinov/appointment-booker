@@ -17,6 +17,22 @@ export const ManageAppointmentForm = (props) => {
 
     if (!date || !firstName || !lastName) return;
 
+    /*
+    TODO: (2024/09/23, 08:13)
+
+          motivated by
+          ```
+          const dateString = '2024-09-25T10:50';
+
+          // Convert the string to a Date object (interpreted as local timezone)
+          const date = new Date(dateString);
+
+          console.log(date.toString());   // Output the date with the local timezone attached
+          console.log(date.toISOString()); // Output the date in ISO 8601 format (UTC)
+          ```
+          change the names of variables that hold _date strings_ to `dateString`
+          and thus reserve `date` for variables that hold `Date` objects
+    */
     await Meteor.callAsync("appointments.insert", {
       date: new Date(date),
       firstName,
@@ -36,7 +52,27 @@ export const ManageAppointmentForm = (props) => {
   ) {
     setManagementAction("Edit");
 
-    setDate(appointmentForEditing.date);
+    // Format the date into 'YYYY-MM-DDTHH:MM' format
+    // (The created string, obviously, does not include a timezone explicitly;
+    // however, it "uses" the local time of the user's machine.)
+    /*
+    const strInISOFormat = appointmentForEditing.date.toISOString();
+    const strInISOFormatWithoutSeconds = strInISOFormat.slice(0, 16); // Remove the seconds and timezone
+    setDate(strInISOFormat);
+    */
+    // Format date in local time as 'YYYY-MM-DDTHH:MM'
+    const date = appointmentForEditing.date;
+
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0"); // Months are zero-based
+    const day = String(date.getDate()).padStart(2, "0");
+    const hours = String(date.getHours()).padStart(2, "0");
+    const minutes = String(date.getMinutes()).padStart(2, "0");
+
+    // Construct the value for the input field
+    const formattedDateTimeLocal = `${year}-${month}-${day}T${hours}:${minutes}`;
+    setDate(formattedDateTimeLocal);
+
     setFirstName(appointmentForEditing.firstName);
     setLastName(appointmentForEditing.lastName);
     // return (
