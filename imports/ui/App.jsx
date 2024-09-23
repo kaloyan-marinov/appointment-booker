@@ -1,7 +1,7 @@
 import React, { useState, Fragment } from "react";
 import { useTracker, useSubscribe } from "meteor/react-meteor-data";
 import { AppointmentsCollection } from "/imports/api/AppointmentsCollection";
-import { Appointment } from "./Appointment";
+import { ListOfAppointments } from "./ListOfAppointments";
 import { ManageAppointmentForm } from "./ManageAppointmentForm";
 import { LoginForm } from "./LoginForm";
 
@@ -108,25 +108,12 @@ export const App = () => {
               </button>
             </div> */}
 
-            <div className="input-for-search">
-              <input
-                type="text"
-                placeholder="Type to filter by first or last name"
-                name="search"
-                value={searchFor}
-                onChange={(e) => setSearchFor(e.target.value)}
-              />
-            </div>
-            <ul className="appointments">
-              {appointments.map((appointment) => (
-                <Appointment
-                  key={appointment._id}
-                  appointment={appointment}
-                  // onCheckboxClick={handleToggleChecked}
-                  setAppointmentForEditing={setAppointmentForEditing}
-                />
-              ))}
-            </ul>
+            <ListOfAppointments
+              searchFor={searchFor}
+              setSearchFor={setSearchFor}
+              appointments={appointments}
+              setAppointmentForEditing={setAppointmentForEditing}
+            />
           </Fragment>
         ) : (
           <LoginForm />
