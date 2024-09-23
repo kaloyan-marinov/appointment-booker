@@ -1,3 +1,9 @@
+export const randomInt = (min, max) => {
+  const randomFloatBetween0And1 = Math.random();
+  const result = min + Math.floor(randomFloatBetween0And1 * (max - min + 1));
+  return result;
+};
+
 // TODO: (2024/09/21, 22:14)
 //      get rid of the time
 //      (i.e. "Date" means "just the date, no time")
