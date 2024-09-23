@@ -1,3 +1,9 @@
+install the project dependencies:
+
+```bash
+~/.meteor/meteor npm install
+```
+
 <u>TODO: (2024/09/21, 20:24)</u>: remove the Meteor packages calles `insecure` and `autopublish`
 
 navigate into the project folder and run:
@@ -35,20 +41,39 @@ using `127.0.0.1`.
 
 ```bash
 meteor [direct: primary] meteor> show tables;
-tasks
+appointments
 users
 
 meteor [direct: primary] meteor> db.users.find()
 [
   {
-    _id: 'z4nCiKS6249DcYxB6',
-    createdAt: ISODate('2024-09-21T12:16:52.549Z'),
+    _id: 'khSS7ZQj2ED7Jfr8r',
+    createdAt: ISODate('2024-09-23T20:44:11.223Z'),
     services: {
       password: {
-        bcrypt: '$2b$10$lPp7jhRf87SwBhI9mc7m9ecs7oFLIGW5kQbTvyCmm33oCMYmnMnhi'
+        bcrypt: '$2b$10$yHao57lYiQqr2Nd25q9F1u29VK71SDL1MktbJX9a.iHCI2LtzDBL.'
+      },
+      resume: {
+        loginTokens: [
+          {
+            when: ISODate('2024-09-23T20:45:18.929Z'),
+            hashedToken: 'sZqGSWfwoamaeGFfnkBz6TFlE2tRKsVR64LjUNLw8ew='
+          }
+        ]
       }
     },
-    username: 'meteorite'
+    username: 'test1'
+  },
+  {
+    _id: '5uugraCA7ehiD5r7L',
+    createdAt: ISODate('2024-09-23T20:44:11.361Z'),
+    services: {
+      password: {
+        bcrypt: '$2b$10$s/G0rnDgBaBdB07A3ehxyeUSYU3L.M.invx5DL3f9TSUJBMFHK1F6'
+      },
+      resume: { loginTokens: [] }
+    },
+    username: 'test2'
   }
 ]
 ```
