@@ -11,20 +11,6 @@ export const App = () => {
   const [appointmentForEditing, setAppointmentForEditing] = useState(null);
   const isLoading = useSubscribe("appointments");
 
-  // const hideCompletedFilter = {
-  //   isChecked: {
-  //     $ne: true,
-  //   },
-  // };
-
-  // const pendingTasksCount = useTracker(()                                                                => {
-  //   if (!user) {
-  //     return 0;
-  //   }
-
-  //   return AppointmentsCollection.find(hideCompletedFilter).count();
-  // });
-
   const appointments = useTracker(() => {
     if (!user) {
       return [];
@@ -57,22 +43,6 @@ export const App = () => {
     return appts;
   });
 
-  // const pendingTasksTitle = `${
-  //   pendingTasksCount ? ` (${pendingTasksCount})` : ""
-  // }`;
-  // console.log("pendingTasksTitle", pendingTasksTitle);
-
-  // const handleToggleChecked = ({ _id, isChecked }) => {
-  //   Meteor.callAsync("tasks.toggleChecked", {
-  //     _id,
-  //     isChecked,
-  //   });
-  // };
-
-  // const handleDelete = ({ _id }) => {
-  //   Meteor.callAsync("tasks.delete", { _id });
-  // };
-
   if (isLoading()) {
     return <div>Loading...</div>;
   }
@@ -84,7 +54,6 @@ export const App = () => {
       <header>
         <div className="app-bar">
           <div className="app-header">
-            {/* <h1>Appointment Booker {pendingTasksTitle}</h1> */}
             <h1>Appointment Booker</h1>
           </div>
         </div>
@@ -101,12 +70,6 @@ export const App = () => {
               appointmentForEditing={appointmentForEditing}
               setAppointmentForEditing={setAppointmentForEditing}
             />
-
-            {/* <div className="filter">
-              <button onClick={() => setHideCompleted(!hideCompleted)}>
-                {hideCompleted ? "Show All" : "Hide Completed"}
-              </button>
-            </div> */}
 
             <ListOfAppointments
               searchFor={searchFor}

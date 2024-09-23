@@ -8,16 +8,6 @@ Meteor.methods({
       userId: this.userId,
     });
   },
-  // "tasks.toggleChecked"({ _id, isChecked }) {
-  //   return AppointmentsCollection.updateAsync(_id, {
-  //     $set: {
-  //       isChecked: !isChecked,
-  //     },
-  //   });
-  // },
-  // "tasks.delete"({ _id }) {
-  //   return AppointmentsCollection.removeAsync(_id);
-  // },
   "appointments.update"({ _id, updatedDoc }) {
     console.log("_id", _id);
     console.log("updatedDoc", updatedDoc);
