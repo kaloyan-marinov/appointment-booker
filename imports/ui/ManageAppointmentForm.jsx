@@ -12,18 +12,21 @@ export const ManageAppointmentForm = (props) => {
 
   const { appointmentForEditing, setAppointmentForEditing } = props;
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  //   if (!text) return;
+    if (!date || !firstName || !lastName) return;
 
-  //   await Meteor.callAsync("tasks.insert", {
-  //     text: text.trim(),
-  //     createdAt: new Date(),
-  //   });
+    await Meteor.callAsync("appointments.insert", {
+      date: new Date(date),
+      firstName,
+      lastName,
+    });
 
-  //   setText("");
-  // };
+    setDate("");
+    setFirstName("");
+    setLastName("");
+  };
 
   if (
     appointmentForEditing &&
@@ -47,10 +50,7 @@ export const ManageAppointmentForm = (props) => {
   }
 
   return (
-    <form
-      className="manage-appointment-form"
-      // onSubmit={handleSubmit}
-    >
+    <form className="manage-appointment-form" onSubmit={handleSubmit}>
       <div>
         <span>{`${managementAction}`} appointment</span>
       </div>
@@ -58,7 +58,7 @@ export const ManageAppointmentForm = (props) => {
         <label htmlFor="date"></label>
 
         <input
-          type="text" // TODO: (2024/09/21, 21:36) - is there a `date`?
+          type="datetime-local" // TODO: (2024/09/21, 21:36) - is there a `date`?
           placeholder="Date for appointment"
           name="date"
           value={date}

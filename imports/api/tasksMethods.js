@@ -2,7 +2,7 @@ import { Meteor } from "meteor/meteor";
 import { AppointmentsCollection } from "./AppointmentsCollection";
 
 Meteor.methods({
-  "tasks.insert"(doc) {
+  "appointments.insert"(doc) {
     return AppointmentsCollection.insertAsync({
       ...doc,
       userId: this.userId,
