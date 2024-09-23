@@ -18,4 +18,14 @@ Meteor.methods({
   // "tasks.delete"({ _id }) {
   //   return AppointmentsCollection.removeAsync(_id);
   // },
+  "appointments.update"({ _id, updatedDoc }) {
+    console.log("_id", _id);
+    console.log("updatedDoc", updatedDoc);
+
+    return AppointmentsCollection.updateAsync(_id, {
+      $set: {
+        ...updatedDoc,
+      },
+    });
+  },
 });

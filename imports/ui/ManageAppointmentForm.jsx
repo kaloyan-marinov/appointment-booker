@@ -12,38 +12,6 @@ export const ManageAppointmentForm = (props) => {
 
   const { appointmentForEditing, setAppointmentForEditing } = props;
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (!date || !firstName || !lastName) return;
-
-    /*
-    TODO: (2024/09/23, 08:13)
-
-          motivated by
-          ```
-          const dateString = '2024-09-25T10:50';
-
-          // Convert the string to a Date object (interpreted as local timezone)
-          const date = new Date(dateString);
-
-          console.log(date.toString());   // Output the date with the local timezone attached
-          console.log(date.toISOString()); // Output the date in ISO 8601 format (UTC)
-          ```
-          change the names of variables that hold _date strings_ to `dateString`
-          and thus reserve `date` for variables that hold `Date` objects
-    */
-    await Meteor.callAsync("appointments.insert", {
-      date: new Date(date),
-      firstName,
-      lastName,
-    });
-
-    setDate("");
-    setFirstName("");
-    setLastName("");
-  };
-
   if (
     appointmentForEditing &&
     date !== appointmentForEditing.date &&
@@ -85,10 +53,72 @@ export const ManageAppointmentForm = (props) => {
     // );
   }
 
+  const handleSubmitInCreateForm = async (e) => {
+    e.preventDefault();
+
+    if (!date || !firstName || !lastName) return;
+
+    /*
+    TODO: (2024/09/23, 08:13)
+
+          motivated by
+          ```
+          const dateString = '2024-09-25T10:50';
+
+          // Convert the string to a Date object (interpreted as local timezone)
+          const date = new Date(dateString);
+
+          console.log(date.toString());   // Output the date with the local timezone attached
+          console.log(date.toISOString()); // Output the date in ISO 8601 format (UTC)
+          ```
+          change the names of variables that hold _date strings_ to `dateString`
+          and thus reserve `date` for variables that hold `Date` objects
+    */
+    await Meteor.callAsync("appointments.insert", {
+      date: new Date(date),
+      firstName,
+      lastName,
+    });
+
+    setManagementAction("Create");
+    setAppointmentForEditing(null);
+    setDate("");
+    setFirstName("");
+    setLastName("");
+  };
+
+  const handleSubmitInEditForm = async (e) => {
+    e.preventDefault();
+
+    if (!date || !firstName || !lastName) return;
+
+    await Meteor.callAsync("appointments.update", {
+      _id: appointmentForEditing._id,
+      updatedDoc: {
+        date: new Date(date),
+        firstName,
+        lastName,
+      },
+    });
+
+    setManagementAction("Create");
+    setAppointmentForEditing(null);
+    setDate("");
+    setFirstName("");
+    setLastName("");
+  };
+
   return (
-    <form className="manage-appointment-form" onSubmit={handleSubmit}>
+    <form
+      className="manage-appointment-form"
+      onSubmit={
+        managementAction === "Create"
+          ? handleSubmitInCreateForm
+          : handleSubmitInEditForm
+      }
+    >
       <div>
-        <span>{`${managementAction}`} appointment</span>
+        <span>{managementAction} appointment</span>
       </div>
       <div>
         <label htmlFor="date"></label>
