@@ -4,8 +4,6 @@ install the project dependencies:
 ~/.meteor/meteor npm install
 ```
 
-<u>TODO: (2024/09/21, 20:24)</u>: remove the Meteor packages calles `insecure` and `autopublish`
-
 navigate into the project folder and run:
 
 ```bash
