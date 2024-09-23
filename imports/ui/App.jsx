@@ -7,6 +7,7 @@ import { LoginForm } from "./LoginForm";
 
 export const App = () => {
   const user = useTracker(() => Meteor.user());
+  const [searchFor, setSearchFor] = useState("");
   const [appointmentForEditing, setAppointmentForEditing] = useState(null);
   const isLoading = useSubscribe("appointments");
 
@@ -30,7 +31,22 @@ export const App = () => {
     }
 
     const appts = AppointmentsCollection.find(
-      {},
+      {
+        $or: [
+          {
+            firstName: {
+              $regex: "^" + searchFor,
+              $options: "i",
+            },
+          },
+          {
+            lastName: {
+              $regex: "^" + searchFor,
+              $options: "i",
+            },
+          },
+        ],
+      },
       {
         sort: {
           date: -1,
@@ -92,14 +108,13 @@ export const App = () => {
               </button>
             </div> */}
 
-            {/* TODO: (2024/09/21, 23:10)
-                      implement a single input
-                      for serve for filtering the displayed list of appointments
-                      by first name and last name, starting from the first character of each
-                      
-                      the displayed list should update dynamically
-                      as the user is typing in the input
-            */}
+            <input
+              type="text"
+              placeholder="Type to filter by first or last name"
+              name="search"
+              value={searchFor}
+              onChange={(e) => setSearchFor(e.target.value)}
+            />
             <ul className="appointments">
               {appointments.map((appointment) => (
                 <Appointment
