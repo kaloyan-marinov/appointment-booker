@@ -1,5 +1,5 @@
 import React from "react";
-import { convertDatetimeToString } from "../utilities";
+import { convertDatetimeToDateOnlyString } from "../utilities";
 
 export const Appointment = (props) => {
   const { appointment, setAppointmentForEditing } = props;
@@ -7,7 +7,7 @@ export const Appointment = (props) => {
   return (
     <li>
       <span>
-        {convertDatetimeToString(appointment.datetime)} -{" "}
+        {convertDatetimeToDateOnlyString(appointment.datetime)} -{" "}
         {appointment.firstName} {appointment.lastName}
       </span>
       <button onClick={() => setAppointmentForEditing(appointment)}>

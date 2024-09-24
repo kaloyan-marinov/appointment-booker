@@ -13,6 +13,28 @@ Additionally, a basic search functionality is available to authenticated users.
 Once logged in, a user sees an input field,
 in which it is possible type to filter the user-owned appointments by first or last name.
 
+# Please note the following implementation detail
+
+For the purposes of this application,
+an appointment is a triplet ('date', firstName, lastName),
+where the term 'date' means 'just the date, no time'.
+
+But:
+
+- in JavaScript,
+  each `Date` object inherently represents a single moment in time,
+  including both date and time components;
+- the same holds true for `Date` objects stored in a MongoDB database.
+
+The project strikes a balance
+between the purpose of the application
+and the realities of the technology stack as follows:
+
+- the code stores any `Date` object in a variable called `datetime`
+- the code converts `Date` objects to 'date-only objects'
+  by setting all time components to 0
+- the frontend renders only dates (without any time components)
+
 # How to set up the project
 
 install the project dependencies:

@@ -100,6 +100,13 @@ Meteor.startup(async () => {
     for (let i = 0; i < 20; i++) {
       const daysInFuture = randomInt(0, 30);
       const datetime = new Date();
+      // Each `Date` object inherently represents a single moment in time,
+      // including both date and time components.
+      // Strip down to a “date-only object" by setting all time components to 0.
+      datetime.setHours(0);
+      datetime.setMinutes(0);
+      datetime.setSeconds(0);
+      datetime.setMilliseconds(0);
       datetime.setDate(datetime.getDate() + daysInFuture);
 
       const idxFirstName = randomInt(0, ARRAY_1_FIRST_NAMES.length - 1);
@@ -116,6 +123,14 @@ Meteor.startup(async () => {
     for (let j = 0; j < 20; j++) {
       const daysInFuture = randomInt(0, 30);
       const datetime = new Date();
+      // Each `Date` object inherently represents a single moment in time,
+      // including both date and time components.
+      // Strip down to a “date-only object" by setting all time components to 0.
+      datetime.setHours(0);
+      datetime.setMinutes(0);
+      datetime.setSeconds(0);
+      datetime.setMilliseconds(0);
+
       datetime.setDate(datetime.getDate() + daysInFuture);
 
       const idxFirstName = randomInt(0, ARRAY_2_FIRST_NAMES.length - 1);

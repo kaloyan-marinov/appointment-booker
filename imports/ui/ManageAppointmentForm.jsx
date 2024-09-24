@@ -27,21 +27,19 @@ export const ManageAppointmentForm = (props) => {
   ) {
     setManagementAction("Edit");
 
-    // Format the datetime into 'YYYY-MM-DDTHH:MM' format
+    // Format the datetime into 'YYYY-MM-DD' format
     // (The created string, obviously, does not include a timezone explicitly;
     // however, it "uses" the local time of the user's machine.)
 
-    // Format datetime in local time as 'YYYY-MM-DDTHH:MM'
+    // Format datetime in local time as 'YYYY-MM-DD'
     const datetime = appointmentForEditing.datetime;
 
     const year = datetime.getFullYear();
     const month = String(datetime.getMonth() + 1).padStart(2, "0"); // Months are zero-based
     const day = String(datetime.getDate()).padStart(2, "0");
-    const hours = String(datetime.getHours()).padStart(2, "0");
-    const minutes = String(datetime.getMinutes()).padStart(2, "0");
 
     // Construct the value for the input field
-    const formattedDatetimeLocal = `${year}-${month}-${day}T${hours}:${minutes}`;
+    const formattedDatetimeLocal = `${year}-${month}-${day}`;
     setDatetime(formattedDatetimeLocal);
 
     setFirstName(appointmentForEditing.firstName);
@@ -95,8 +93,8 @@ export const ManageAppointmentForm = (props) => {
         <label htmlFor="datetime"></label>
 
         <input
-          type="datetime-local"
-          placeholder="Datetime for appointment"
+          type="date"
+          placeholder="Date for appointment"
           name="datetime"
           value={datetime}
           onChange={(e) => setDatetime(e.target.value)}
