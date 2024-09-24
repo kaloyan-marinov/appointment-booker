@@ -49,7 +49,7 @@ export const App = () => {
       },
       {
         sort: {
-          date: -1,
+          datetime: -1,
         },
       }
     ).fetch();
@@ -108,13 +108,15 @@ export const App = () => {
               </button>
             </div> */}
 
-            <input
-              type="text"
-              placeholder="Type to filter by first or last name"
-              name="search"
-              value={searchFor}
-              onChange={(e) => setSearchFor(e.target.value)}
-            />
+            <div className="input-for-search">
+              <input
+                type="text"
+                placeholder="Type to filter by first or last name"
+                name="search"
+                value={searchFor}
+                onChange={(e) => setSearchFor(e.target.value)}
+              />
+            </div>
             <ul className="appointments">
               {appointments.map((appointment) => (
                 <Appointment
