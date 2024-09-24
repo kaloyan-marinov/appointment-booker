@@ -123,9 +123,14 @@ header {
   flex-grow: 1;
 }
 
-.appointments > li > button {
+.appointments > li > button, .management-actions > button {
   justify-self: flex-end;
   background-color: #ff3046;
+}
+
+.management-actions > button {
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .filter {

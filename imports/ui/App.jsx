@@ -1,20 +1,15 @@
 import React, { useState, Fragment } from "react";
 import { useTracker, useSubscribe } from "meteor/react-meteor-data";
-import { TasksCollection } from "/imports/api/TasksCollection";
+import { AppointmentsCollection } from "/imports/api/AppointmentsCollection";
 import { Appointment } from "./Appointment";
 import { ManageAppointmentForm } from "./ManageAppointmentForm";
 import { LoginForm } from "./LoginForm";
 
-const appointments = [
-  { _id: 1, firstName: "Alice", lastName: "Allison", date: new Date() },
-  { _id: 2, firstName: "Bob", lastName: "Baker", date: new Date() },
-  { _id: 3, firstName: "Charlie", lastName: "Chaplin", date: new Date() },
-];
-
 export const App = () => {
   const user = useTracker(() => Meteor.user());
+  const [searchFor, setSearchFor] = useState("");
   const [appointmentForEditing, setAppointmentForEditing] = useState(null);
-  // const isLoading = useSubscribe("tasks");
+  const isLoading = useSubscribe("appointments");
 
   // const hideCompletedFilter = {
   //   isChecked: {
@@ -27,20 +22,40 @@ export const App = () => {
   //     return 0;
   //   }
 
-  //   return TasksCollection.find(hideCompletedFilter).count();
+  //   return AppointmentsCollection.find(hideCompletedFilter).count();
   // });
 
-  // const tasks = useTracker(() => {
-  //   if (!user) {
-  //     return [];
-  //   }
+  const appointments = useTracker(() => {
+    if (!user) {
+      return [];
+    }
 
-  //   return TasksCollection.find(hideCompleted ? hideCompletedFilter : {}, {
-  //     sort: {
-  //       createdAt: -1,
-  //     },
-  //   }).fetch();
-  // });
+    const appts = AppointmentsCollection.find(
+      {
+        $or: [
+          {
+            firstName: {
+              $regex: "^" + searchFor,
+              $options: "i",
+            },
+          },
+          {
+            lastName: {
+              $regex: "^" + searchFor,
+              $options: "i",
+            },
+          },
+        ],
+      },
+      {
+        sort: {
+          date: -1,
+        },
+      }
+    ).fetch();
+
+    return appts;
+  });
 
   // const pendingTasksTitle = `${
   //   pendingTasksCount ? ` (${pendingTasksCount})` : ""
@@ -58,9 +73,9 @@ export const App = () => {
   //   Meteor.callAsync("tasks.delete", { _id });
   // };
 
-  // if (isLoading()) {
-  //   return <div>Loading...</div>;
-  // }
+  if (isLoading()) {
+    return <div>Loading...</div>;
+  }
 
   const logout = () => Meteor.logout();
 
@@ -93,14 +108,13 @@ export const App = () => {
               </button>
             </div> */}
 
-            {/* TODO: (2024/09/21, 23:10)
-                      implement a single input
-                      for serve for filtering the displayed list of appointments
-                      by first name and last name, starting from the first character of each
-                      
-                      the displayed list should update dynamically
-                      as the user is typing in the input
-            */}
+            <input
+              type="text"
+              placeholder="Type to filter by first or last name"
+              name="search"
+              value={searchFor}
+              onChange={(e) => setSearchFor(e.target.value)}
+            />
             <ul className="appointments">
               {appointments.map((appointment) => (
                 <Appointment

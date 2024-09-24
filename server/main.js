@@ -1,14 +1,25 @@
 import { Meteor } from "meteor/meteor";
 import { Accounts } from "meteor/accounts-base";
-import { TasksCollection } from "/imports/api/TasksCollection";
-import "../imports/api/TasksPublications";
-import "../imports/api/tasksMethods";
+import { AppointmentsCollection } from "/imports/api/AppointmentsCollection";
+import "../imports/api/AppointmentsPublications";
+import "../imports/api/appointmentsMethods";
 
-const insertTask = (taskText, user) => {
-  TasksCollection.insertAsync({
-    text: taskText,
+const ARRAY_1_RAW_APPOINTMENTS = [
+  { firstName: "Alice", lastName: "Allison", date: new Date() },
+  { firstName: "Bob", lastName: "Baker", date: new Date() },
+  { firstName: "Charlie", lastName: "Chaplin", date: new Date() },
+];
+
+const ARRAY_2_RAW_APPOINTMENTS = [
+  { firstName: "Donald", lastName: "Duck", date: new Date() },
+  { firstName: "Daffy", lastName: "Duck", date: new Date() },
+  { firstName: "Ellen", lastName: "Edwards", date: new Date() },
+];
+
+const insertAppointment = (rawAppointment, user) => {
+  AppointmentsCollection.insertAsync({
+    ...rawAppointment,
     userId: user._id,
-    createdAt: new Date(),
   });
 };
 
@@ -37,16 +48,15 @@ Meteor.startup(async () => {
   }
 
   const user1 = await Accounts.findUserByUsername(USER_1_USERNAME);
+  const user2 = await Accounts.findUserByUsername(USER_2_USERNAME);
 
-  if ((await TasksCollection.find().countAsync()) === 0) {
-    [
-      "Task 1",
-      "Task 2",
-      "Task 3",
-      "Task 4",
-      "Task 5",
-      "Task 6",
-      "Task 7",
-    ].forEach((taskText) => insertTask(taskText, user1));
+  if ((await AppointmentsCollection.find().countAsync()) === 0) {
+    ARRAY_1_RAW_APPOINTMENTS.forEach((rawAppointment) =>
+      insertAppointment(rawAppointment, user1)
+    );
+
+    ARRAY_2_RAW_APPOINTMENTS.forEach((rawAppointment) =>
+      insertAppointment(rawAppointment, user2)
+    );
   }
 });
