@@ -1,6 +1,7 @@
 import React from "react";
+import { convertDateToString } from "../utilities";
 
-export const Task = ({ task, onCheckboxClick, onDeleteClick }) => {
+export const Appointment = (props) => {
   /*
   console.log(task.isChecked); // -> undefined
   console.log(typeof task.isChecked); // -> undefined
@@ -11,17 +12,23 @@ export const Task = ({ task, onCheckboxClick, onDeleteClick }) => {
   console.log(!!task.isChecked); // -> false
   console.log(typeof !!task.isChecked); // -> boolean
   */
+  const { appointment, setAppointmentForEditing } = props;
 
   return (
     <li>
-      <input
+      {/* <input
         type="checkbox"
         checked={!!task.isChecked}
         onClick={() => onCheckboxClick(task)}
         readOnly
-      />
-      <span>{task.text}</span>
-      <button onClick={() => onDeleteClick(task)}>&times;</button>
+      /> */}
+      <span>
+        {convertDateToString(appointment.date)} - {appointment.firstName}{" "}
+        {appointment.lastName}
+      </span>
+      <button onClick={() => setAppointmentForEditing(appointment)}>
+        Edit
+      </button>
     </li>
   );
 };
