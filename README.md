@@ -85,7 +85,7 @@ to access services running on the host
 using `127.0.0.1`.
 )
 
-```bash
+```
 meteor [direct: primary] meteor> show tables;
 appointments
 users
@@ -122,4 +122,13 @@ meteor [direct: primary] meteor> db.users.find()
     username: 'test2'
   }
 ]
+```
+
+in order to get a clean slate -
+as far as the content in the MongoDB database is concerned -
+issue the following command:
+
+```
+meteor [direct: primary] meteor> db.dropDatabase()
+{ ok: 1, dropped: 'meteor' }
 ```
