@@ -1,7 +1,7 @@
 import React, { useState, Fragment } from "react";
 import { useTracker, useSubscribe } from "meteor/react-meteor-data";
 import { AppointmentsCollection } from "/imports/api/AppointmentsCollection";
-import { Appointment } from "./Appointment";
+import { ListOfAppointments } from "./ListOfAppointments";
 import { ManageAppointmentForm } from "./ManageAppointmentForm";
 import { LoginForm } from "./LoginForm";
 
@@ -10,20 +10,6 @@ export const App = () => {
   const [searchFor, setSearchFor] = useState("");
   const [appointmentForEditing, setAppointmentForEditing] = useState(null);
   const isLoading = useSubscribe("appointments");
-
-  // const hideCompletedFilter = {
-  //   isChecked: {
-  //     $ne: true,
-  //   },
-  // };
-
-  // const pendingTasksCount = useTracker(()                                                                => {
-  //   if (!user) {
-  //     return 0;
-  //   }
-
-  //   return AppointmentsCollection.find(hideCompletedFilter).count();
-  // });
 
   const appointments = useTracker(() => {
     if (!user) {
@@ -57,22 +43,6 @@ export const App = () => {
     return appts;
   });
 
-  // const pendingTasksTitle = `${
-  //   pendingTasksCount ? ` (${pendingTasksCount})` : ""
-  // }`;
-  // console.log("pendingTasksTitle", pendingTasksTitle);
-
-  // const handleToggleChecked = ({ _id, isChecked }) => {
-  //   Meteor.callAsync("tasks.toggleChecked", {
-  //     _id,
-  //     isChecked,
-  //   });
-  // };
-
-  // const handleDelete = ({ _id }) => {
-  //   Meteor.callAsync("tasks.delete", { _id });
-  // };
-
   if (isLoading()) {
     return <div>Loading...</div>;
   }
@@ -84,7 +54,6 @@ export const App = () => {
       <header>
         <div className="app-bar">
           <div className="app-header">
-            {/* <h1>Appointment Booker {pendingTasksTitle}</h1> */}
             <h1>Appointment Booker</h1>
           </div>
         </div>
@@ -102,31 +71,12 @@ export const App = () => {
               setAppointmentForEditing={setAppointmentForEditing}
             />
 
-            {/* <div className="filter">
-              <button onClick={() => setHideCompleted(!hideCompleted)}>
-                {hideCompleted ? "Show All" : "Hide Completed"}
-              </button>
-            </div> */}
-
-            <div className="input-for-search">
-              <input
-                type="text"
-                placeholder="Type to filter by first or last name"
-                name="search"
-                value={searchFor}
-                onChange={(e) => setSearchFor(e.target.value)}
-              />
-            </div>
-            <ul className="appointments">
-              {appointments.map((appointment) => (
-                <Appointment
-                  key={appointment._id}
-                  appointment={appointment}
-                  // onCheckboxClick={handleToggleChecked}
-                  setAppointmentForEditing={setAppointmentForEditing}
-                />
-              ))}
-            </ul>
+            <ListOfAppointments
+              searchFor={searchFor}
+              setSearchFor={setSearchFor}
+              appointments={appointments}
+              setAppointmentForEditing={setAppointmentForEditing}
+            />
           </Fragment>
         ) : (
           <LoginForm />

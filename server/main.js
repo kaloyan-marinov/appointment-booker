@@ -5,16 +5,11 @@ import "../imports/api/AppointmentsPublications";
 import "../imports/api/appointmentsMethods";
 import { randomInt } from "../imports/utilities";
 
-// const ARRAY_1_RAW_APPOINTMENTS = [
-//   { firstName: "Alice", lastName: "Allison", datetime: new Date() },
-//   { firstName: "Bob", lastName: "Baker", datetime: new Date() },
-//   { firstName: "Charlie", lastName: "Chaplin", datetime: new Date() },
-// ];
-
-// const ARRAY_2_RAW_APPOINTMENTS = [
-//   { firstName: "Donald", lastName: "Duck", datetime: new Date() },
-//   { firstName: "Daffy", lastName: "Duck", datetime: new Date() },
-//   { firstName: "Ellen", lastName: "Edwards", datetime: new Date() },
+// Read from environment variables.
+const USER_1_USERNAME = process.env.USER_1_USERNAME;
+const USER_1_PASSWORD = process.env.USER_1_PASSWORD;
+const USER_2_USERNAME = process.env.USER_2_USERNAME;
+const USER_2_PASSWORD = process.env.USER_2_PASSWORD;
 
 // Each of the following names starts with a vowel.
 const ARRAY_1_FIRST_NAMES = [
@@ -70,6 +65,7 @@ const ARRAY_2_LAST_NAMES = [
   "Wilson",
 ];
 
+// Helper function.
 const insertAppointment = (rawAppointment, user) => {
   AppointmentsCollection.insertAsync({
     ...rawAppointment,
@@ -77,11 +73,9 @@ const insertAppointment = (rawAppointment, user) => {
   });
 };
 
-const USER_1_USERNAME = process.env.USER_1_USERNAME;
-const USER_1_PASSWORD = process.env.USER_1_PASSWORD;
-const USER_2_USERNAME = process.env.USER_2_USERNAME;
-const USER_2_PASSWORD = process.env.USER_2_PASSWORD;
-
+// Arrange for
+// (a) 2 users to be created, and
+// (b) 20 appointments for each user to be created.
 Meteor.startup(async () => {
   // TODO: (2024/09/21, 14:18)
   //      look into why VS Code issues a warning for each of the next uses of `await`,
@@ -106,6 +100,13 @@ Meteor.startup(async () => {
     for (let i = 0; i < 20; i++) {
       const daysInFuture = randomInt(0, 30);
       const datetime = new Date();
+      // Each `Date` object inherently represents a single moment in time,
+      // including both date and time components.
+      // Strip down to a “date-only object" by setting all time components to 0.
+      datetime.setHours(0);
+      datetime.setMinutes(0);
+      datetime.setSeconds(0);
+      datetime.setMilliseconds(0);
       datetime.setDate(datetime.getDate() + daysInFuture);
 
       const idxFirstName = randomInt(0, ARRAY_1_FIRST_NAMES.length - 1);
@@ -122,6 +123,14 @@ Meteor.startup(async () => {
     for (let j = 0; j < 20; j++) {
       const daysInFuture = randomInt(0, 30);
       const datetime = new Date();
+      // Each `Date` object inherently represents a single moment in time,
+      // including both date and time components.
+      // Strip down to a “date-only object" by setting all time components to 0.
+      datetime.setHours(0);
+      datetime.setMinutes(0);
+      datetime.setSeconds(0);
+      datetime.setMilliseconds(0);
+
       datetime.setDate(datetime.getDate() + daysInFuture);
 
       const idxFirstName = randomInt(0, ARRAY_2_FIRST_NAMES.length - 1);
@@ -134,12 +143,5 @@ Meteor.startup(async () => {
       };
       insertAppointment(rawAppointment, user2);
     }
-    // ARRAY_1_RAW_APPOINTMENTS.forEach((rawAppointment) =>
-    //   insertAppointment(rawAppointment, user1)
-    // );
-
-    // ARRAY_2_RAW_APPOINTMENTS.forEach((rawAppointment) =>
-    //   insertAppointment(rawAppointment, user2)
-    // );
   }
 });

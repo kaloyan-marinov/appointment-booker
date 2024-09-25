@@ -1,3 +1,42 @@
+# Introduction
+
+This repository implements a web application for managing appointments.
+
+There is a rudimentary authentication sub-system.
+
+An authenticated user is able to
+create new appointments,
+retrieve all appointments "owned" by that user,
+edit an exising appointment.
+
+Additionally, a basic search functionality is available to authenticated users.
+Once logged in, a user sees an input field,
+in which it is possible type to filter the user-owned appointments by first or last name.
+
+# Please note the following implementation detail
+
+For the purposes of this application,
+an appointment is a triplet ('date', firstName, lastName),
+where the term 'date' means 'just the date, no time'.
+
+But:
+
+- in JavaScript,
+  each `Date` object inherently represents a single moment in time,
+  including both date and time components;
+- the same holds true for `Date` objects stored in a MongoDB database.
+
+The project strikes a balance
+between the purpose of the application
+and the realities of the technology stack as follows:
+
+- the code stores any `Date` object in a variable called `datetime`
+- the code converts `Date` objects to 'date-only objects'
+  by setting all time components to 0
+- the frontend renders only dates (without any time components)
+
+# How to set up the project
+
 install the project dependencies:
 
 ```bash
@@ -13,6 +52,15 @@ USER_1_USERNAME=test1 \
   USER_2_PASSWORD=pass2 \
   ~/.meteor/meteor run
 ```
+
+<u>the preceding command</u> creates:
+
+- a MongoDB database;
+- a Meteor.js server and a Meteor.js client;
+- 2 users in the MongoDB database; and
+- 20 appointments for each of those users (also in the database);
+
+---
 
 if your development machine is running a Linux OS,
 you can use the following command in order to
@@ -37,7 +85,7 @@ to access services running on the host
 using `127.0.0.1`.
 )
 
-```bash
+```
 meteor [direct: primary] meteor> show tables;
 appointments
 users
@@ -74,4 +122,13 @@ meteor [direct: primary] meteor> db.users.find()
     username: 'test2'
   }
 ]
+```
+
+in order to get a clean slate -
+as far as the content in the MongoDB database is concerned -
+issue the following command:
+
+```
+meteor [direct: primary] meteor> db.dropDatabase()
+{ ok: 1, dropped: 'meteor' }
 ```

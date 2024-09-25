@@ -77,32 +77,6 @@ header {
   margin-right: 1em;
 }
 
-/* .task-form {
-  display: flex;
-  margin: 16px;
-}
-
-.task-form > input {
-  flex-grow: 1;
-  box-sizing: border-box;
-  padding: 10px 6px;
-  background: transparent;
-  border: 1px solid #aaa;
-  width: 100%;
-  font-size: 1em;
-  margin-right: 16px;
-}
-
-.task-form > input:focus {
-  outline: 0;
-}
-
-.task-form > button {
-  min-width: 100px;
-  height: 95%;
-  background-color: #315481;
-} */
-
 .appointments {
   list-style-type: none;
   padding-inline-start: 0;

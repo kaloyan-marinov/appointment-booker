@@ -1,16 +1,39 @@
-import React, { useState, Fragment } from "react";
-// import { AppointmentsCollection } from "/imports/api/AppointmentsCollection";
+import React, { useState, useEffect, Fragment } from "react";
 
 export const ManageAppointmentForm = (props) => {
+  const { appointmentForEditing, setAppointmentForEditing } = props;
+
   // The admissible values for the next state variable are
   // "Create", "Edit".
   const [managementAction, setManagementAction] = useState("Create");
 
-  const [datetime, setDatetime] = useState(""); // TODO: (2024/09/21, 21:36) - is there a `datetime`?
+  const [datetime, setDatetime] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
 
-  const { appointmentForEditing, setAppointmentForEditing } = props;
+  useEffect(() => {
+    if (appointmentForEditing) {
+      setManagementAction("Edit");
+
+      // Format the datetime into 'YYYY-MM-DD' format
+      // (The created string, obviously, does not include a timezone explicitly;
+      // however, it "uses" the local time of the user's machine.)
+
+      // Format datetime in local time as 'YYYY-MM-DD'
+      const datetime = appointmentForEditing.datetime;
+
+      const year = datetime.getFullYear();
+      const month = String(datetime.getMonth() + 1).padStart(2, "0"); // Months are zero-based
+      const day = String(datetime.getDate()).padStart(2, "0");
+
+      // Construct the value for the input field
+      const formattedDatetimeLocal = `${year}-${month}-${day}`;
+      setDatetime(formattedDatetimeLocal);
+
+      setFirstName(appointmentForEditing.firstName);
+      setLastName(appointmentForEditing.lastName);
+    }
+  }, [appointmentForEditing]);
 
   const resetFormFields = () => {
     setManagementAction("Create");
@@ -19,47 +42,6 @@ export const ManageAppointmentForm = (props) => {
     setFirstName("");
     setLastName("");
   };
-
-  if (
-    appointmentForEditing &&
-    datetime !== appointmentForEditing.datetime &&
-    firstName !== appointmentForEditing.firstName &&
-    lastName !== appointmentForEditing.lastName
-  ) {
-    setManagementAction("Edit");
-
-    // Format the datetime into 'YYYY-MM-DDTHH:MM' format
-    // (The created string, obviously, does not include a timezone explicitly;
-    // however, it "uses" the local time of the user's machine.)
-    /*
-    const strInISOFormat = appointmentForEditing.datetime.toISOString();
-    const strInISOFormatWithoutSeconds = strInISOFormat.slice(0, 16); // Remove the seconds and timezone
-    setDatetime(strInISOFormat);
-    */
-    // Format datetime in local time as 'YYYY-MM-DDTHH:MM'
-    const datetime = appointmentForEditing.datetime;
-
-    const year = datetime.getFullYear();
-    const month = String(datetime.getMonth() + 1).padStart(2, "0"); // Months are zero-based
-    const day = String(datetime.getDate()).padStart(2, "0");
-    const hours = String(datetime.getHours()).padStart(2, "0");
-    const minutes = String(datetime.getMinutes()).padStart(2, "0");
-
-    // Construct the value for the input field
-    const formattedDatetimeLocal = `${year}-${month}-${day}T${hours}:${minutes}`;
-    setDatetime(formattedDatetimeLocal);
-
-    setFirstName(appointmentForEditing.firstName);
-    setLastName(appointmentForEditing.lastName);
-    // return (
-    //   <form className="manage-appointment-form">
-    //     <div>
-    //       <span>_EDIT_ appointment ID: {appointmentForEditing._id}</span>
-    //     </div>
-    //     <button onClick={() => setAppointmentForEditing(null)}>Cancel</button>
-    //   </form>
-    // );
-  }
 
   const handleSubmitInCreateForm = async (e) => {
     e.preventDefault();
@@ -108,8 +90,8 @@ export const ManageAppointmentForm = (props) => {
         <label htmlFor="datetime"></label>
 
         <input
-          type="datetime-local"
-          placeholder="Datetime for appointment"
+          type="date"
+          placeholder="Date for appointment"
           name="datetime"
           value={datetime}
           onChange={(e) => setDatetime(e.target.value)}
