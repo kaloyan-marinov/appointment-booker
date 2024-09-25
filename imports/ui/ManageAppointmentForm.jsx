@@ -1,6 +1,8 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 
 export const ManageAppointmentForm = (props) => {
+  const { appointmentForEditing, setAppointmentForEditing } = props;
+
   // The admissible values for the next state variable are
   // "Create", "Edit".
   const [managementAction, setManagementAction] = useState("Create");
@@ -9,7 +11,29 @@ export const ManageAppointmentForm = (props) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
 
-  const { appointmentForEditing, setAppointmentForEditing } = props;
+  useEffect(() => {
+    if (appointmentForEditing) {
+      setManagementAction("Edit");
+
+      // Format the datetime into 'YYYY-MM-DD' format
+      // (The created string, obviously, does not include a timezone explicitly;
+      // however, it "uses" the local time of the user's machine.)
+
+      // Format datetime in local time as 'YYYY-MM-DD'
+      const datetime = appointmentForEditing.datetime;
+
+      const year = datetime.getFullYear();
+      const month = String(datetime.getMonth() + 1).padStart(2, "0"); // Months are zero-based
+      const day = String(datetime.getDate()).padStart(2, "0");
+
+      // Construct the value for the input field
+      const formattedDatetimeLocal = `${year}-${month}-${day}`;
+      setDatetime(formattedDatetimeLocal);
+
+      setFirstName(appointmentForEditing.firstName);
+      setLastName(appointmentForEditing.lastName);
+    }
+  }, [appointmentForEditing]);
 
   const resetFormFields = () => {
     setManagementAction("Create");
@@ -18,33 +42,6 @@ export const ManageAppointmentForm = (props) => {
     setFirstName("");
     setLastName("");
   };
-
-  if (
-    appointmentForEditing &&
-    datetime !== appointmentForEditing.datetime &&
-    firstName !== appointmentForEditing.firstName &&
-    lastName !== appointmentForEditing.lastName
-  ) {
-    setManagementAction("Edit");
-
-    // Format the datetime into 'YYYY-MM-DD' format
-    // (The created string, obviously, does not include a timezone explicitly;
-    // however, it "uses" the local time of the user's machine.)
-
-    // Format datetime in local time as 'YYYY-MM-DD'
-    const datetime = appointmentForEditing.datetime;
-
-    const year = datetime.getFullYear();
-    const month = String(datetime.getMonth() + 1).padStart(2, "0"); // Months are zero-based
-    const day = String(datetime.getDate()).padStart(2, "0");
-
-    // Construct the value for the input field
-    const formattedDatetimeLocal = `${year}-${month}-${day}`;
-    setDatetime(formattedDatetimeLocal);
-
-    setFirstName(appointmentForEditing.firstName);
-    setLastName(appointmentForEditing.lastName);
-  }
 
   const handleSubmitInCreateForm = async (e) => {
     e.preventDefault();
