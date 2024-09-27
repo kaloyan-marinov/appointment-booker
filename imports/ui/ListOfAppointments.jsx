@@ -1,9 +1,50 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
+import { useTracker, useSubscribe } from "meteor/react-meteor-data";
 import { Appointment } from "./Appointment";
+import { AppointmentsCollection } from "/imports/api/AppointmentsCollection";
 
 export const ListOfAppointments = (props) => {
-  const { searchFor, setSearchFor, appointments, setAppointmentForEditing } =
-    props;
+  const { setAppointmentForEditing, user } = props;
+
+  const [searchFor, setSearchFor] = useState("");
+
+  const appointments = useTracker(() => {
+    if (!user) {
+      return [];
+    }
+
+    const appts = AppointmentsCollection.find(
+      {
+        $or: [
+          {
+            firstName: {
+              $regex: "^" + searchFor,
+              $options: "i",
+            },
+          },
+          {
+            lastName: {
+              $regex: "^" + searchFor,
+              $options: "i",
+            },
+          },
+        ],
+      },
+      {
+        sort: {
+          datetime: -1,
+        },
+      }
+    ).fetch();
+
+    return appts;
+  });
+
+  const isLoading = useSubscribe("appointments");
+
+  if (isLoading()) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <Fragment>

@@ -1,51 +1,13 @@
 import React, { useState, Fragment } from "react";
 import { useTracker, useSubscribe } from "meteor/react-meteor-data";
-import { AppointmentsCollection } from "/imports/api/AppointmentsCollection";
+// import { AppointmentsCollection } from "/imports/api/AppointmentsCollection";
 import { ListOfAppointments } from "./ListOfAppointments";
 import { ManageAppointmentForm } from "./ManageAppointmentForm";
 import { LoginForm } from "./LoginForm";
 
 export const App = () => {
   const user = useTracker(() => Meteor.user());
-  const [searchFor, setSearchFor] = useState("");
   const [appointmentForEditing, setAppointmentForEditing] = useState(null);
-  const isLoading = useSubscribe("appointments");
-
-  const appointments = useTracker(() => {
-    if (!user) {
-      return [];
-    }
-
-    const appts = AppointmentsCollection.find(
-      {
-        $or: [
-          {
-            firstName: {
-              $regex: "^" + searchFor,
-              $options: "i",
-            },
-          },
-          {
-            lastName: {
-              $regex: "^" + searchFor,
-              $options: "i",
-            },
-          },
-        ],
-      },
-      {
-        sort: {
-          datetime: -1,
-        },
-      }
-    ).fetch();
-
-    return appts;
-  });
-
-  if (isLoading()) {
-    return <div>Loading...</div>;
-  }
 
   const logout = () => Meteor.logout();
 
@@ -59,6 +21,13 @@ export const App = () => {
         </div>
       </header>
 
+      {user && (
+        <ManageAppointmentForm
+          appointmentForEditing={appointmentForEditing}
+          setAppointmentForEditing={setAppointmentForEditing}
+        />
+      )}
+
       <div className="main">
         {user ? (
           <Fragment>
@@ -66,16 +35,9 @@ export const App = () => {
               {user.username}
             </div>
 
-            <ManageAppointmentForm
-              appointmentForEditing={appointmentForEditing}
-              setAppointmentForEditing={setAppointmentForEditing}
-            />
-
             <ListOfAppointments
-              searchFor={searchFor}
-              setSearchFor={setSearchFor}
-              appointments={appointments}
               setAppointmentForEditing={setAppointmentForEditing}
+              user={user}
             />
           </Fragment>
         ) : (
